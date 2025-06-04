@@ -1,0 +1,117 @@
+$globalduration: .15s;
+
+@mixin sameSize($size) {
+    height: $size;
+    width: $size;
+}
+
+* {
+    scrollbar-width: thin !important;
+    scrollbar-color: var(--accent-color) #00000000 !important;
+    transition-duration: $globalduration;
+    transition-timing-function: ease-in-out;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    &::-webkit-scrollbar {
+        width: 7px !important;
+        height: 7px !important;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: var(--accent-color) !important;
+    }
+    &::-webkit-scrollbar-track {
+        background: #00000000 !important;
+    }
+    &, &::before, &::after {
+        box-sizing: border-box;
+    }
+}
+
+::selection {
+    color: var(--background);
+    background: var(--accent-color);
+}
+
+a {
+    &, &:visited {
+        color: var(--text-color);
+        text-decoration: none;
+    }
+}
+
+header, footer, sidebar, menubar {
+    -webkit-touch-callout: none;
+    user-select: none;
+}
+
+html {
+    --sans: 'PT Sans', sans-serif;
+    --mono: 'Courier Prime', monospace;
+    font-size: 10px;
+    &, body {
+        @include sameSize(100%);
+    }
+    body {
+        font-size: 1.6rem;
+        font-family: var(--sans);
+        margin: 0;
+        padding: 0;
+        background: var(--bg-deep);
+        color: var(--text-color);
+    }
+}
+
+content {
+    display: flex;
+    flex-direction: column;
+    @include sameSize(100%);
+    header {
+        display: flex;
+        height: 6rem;
+        width: 100%;
+        max-width: 1440px;
+        margin: 1.5rem auto 0 auto;
+        padding: .5rem 2rem;
+    }
+    footer {
+        display: flex;
+        height: 4.5rem;
+        width: 100%;
+        max-width: 1440px;
+        margin: 0 auto;
+        padding: .5rem 2rem;
+    }
+    main {
+        flex: 1 0 auto;
+        display: flex;
+    }
+}
+
+header {
+    align-items: center;
+    justify-content: center;
+    a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        @include sameSize(100%);
+    }
+    svg {
+        height: 100%;
+        width: auto;
+    }
+}
+
+footer {
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.4rem;
+    > about, > github {
+        display: flex;
+        gap: .75rem;
+        > a {
+            display: flex;
+            gap: .6rem;
+        }
+    }
+}
