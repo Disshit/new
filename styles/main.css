@@ -43,8 +43,9 @@ header, footer, sidebar, menubar {
 }
 
 html {
-  --sans: "PT Sans", sans-serif;
+  --sans: "Radio Canada", sans-serif;
   --mono: "Courier Prime", monospace;
+  --logo: "Cuprum", sans-serif;
   font-size: 10px;
 }
 html, html body {
@@ -68,19 +69,17 @@ content {
 }
 content header {
   display: flex;
-  height: 6rem;
+  height: 5.5rem;
   width: 100%;
-  max-width: 1440px;
   margin: 1.5rem auto 0 auto;
-  padding: 0.5rem 2rem;
+  padding: 0.5rem 3.2rem;
 }
 content footer {
   display: flex;
   height: 4.5rem;
   width: 100%;
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 0.5rem 2rem;
+  margin: 0 auto 0.75rem auto;
+  padding: 0.5rem 3.2rem;
 }
 content main {
   flex: 1 0 auto;
@@ -89,16 +88,21 @@ content main {
 
 header {
   align-items: center;
-  justify-content: center;
 }
-header a {
+header .logo {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;
-  width: 100%;
+  width: -moz-fit-content;
+  width: fit-content;
+  gap: 1.25rem;
 }
-header svg {
+header .logo span {
+  font-family: var(--logo);
+  font-size: 3.25rem;
+}
+header .logo svg {
   height: 100%;
   width: auto;
 }

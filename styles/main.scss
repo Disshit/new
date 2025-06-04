@@ -5,6 +5,7 @@ $globalduration: .15s;
     width: $size;
 }
 
+
 * {
     scrollbar-width: thin !important;
     scrollbar-color: var(--accent-color) #00000000 !important;
@@ -45,8 +46,9 @@ header, footer, sidebar, menubar {
 }
 
 html {
-    --sans: 'PT Sans', sans-serif;
+    --sans: 'Radio Canada', sans-serif;
     --mono: 'Courier Prime', monospace;
+    --logo: 'Cuprum', sans-serif;
     font-size: 10px;
     &, body {
         @include sameSize(100%);
@@ -67,19 +69,19 @@ content {
     @include sameSize(100%);
     header {
         display: flex;
-        height: 6rem;
+        height: 5.5rem;
         width: 100%;
-        max-width: 1440px;
+        // max-width: 1440px;
         margin: 1.5rem auto 0 auto;
-        padding: .5rem 2rem;
+        padding: .5rem 3.2rem;
     }
     footer {
         display: flex;
         height: 4.5rem;
         width: 100%;
-        max-width: 1440px;
-        margin: 0 auto;
-        padding: .5rem 2rem;
+        // max-width: 1440px;
+        margin: 0 auto .75rem auto;
+        padding: .5rem 3.2rem;
     }
     main {
         flex: 1 0 auto;
@@ -89,16 +91,22 @@ content {
 
 header {
     align-items: center;
-    justify-content: center;
-    a {
+    // justify-content: center;
+    .logo {
         display: flex;
         align-items: center;
         justify-content: center;
-        @include sameSize(100%);
-    }
-    svg {
         height: 100%;
-        width: auto;
+        width: fit-content;
+        gap: 1.25rem;
+        span {
+            font-family: var(--logo);
+            font-size: 3.25rem;
+        }
+        svg {
+            height: 100%;
+            width: auto;
+        }
     }
 }
 
