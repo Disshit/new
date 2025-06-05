@@ -2,7 +2,9 @@
 
 const darkTheme = `
     html, html[data-dark="default"] {
-        --accent-color: #f29c24;
+        --accent-color: #ec9918;
+        --accent-lite: #f2d230;
+        --accent-deep: #e56000;
         --text-color: #f8fafc;
         --bg-deep: #202124;
         --bg-mid: #28292a;
@@ -12,7 +14,9 @@ const darkTheme = `
 
 const lightTheme = `
     html, html[data-light="default"] {
-        --accent-color: #f29c24;
+        --accent-color: #ec9918;
+        --accent-lite: #f2d230;
+        --accent-deep: #e56000;
         --text-color: #080a0c;
         --bg-deep: #ffffff;
         --bg-mid: #f9f9f9;

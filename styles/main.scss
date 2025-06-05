@@ -1,8 +1,18 @@
-$globalduration: .15s;
+$globalduration: .1s;
 
 @mixin sameSize($size) {
     height: $size;
     width: $size;
+}
+
+
+@keyframes breathing {
+    0%, 15%, 85%, 100% {
+        opacity: .8;
+    }
+    50% {
+        opacity: .2;
+    }
 }
 
 
@@ -67,21 +77,20 @@ content {
     display: flex;
     flex-direction: column;
     @include sameSize(100%);
-    header {
+    header, footer {
         display: flex;
-        height: 5.5rem;
         width: 100%;
-        // max-width: 1440px;
-        margin: 1.5rem auto 0 auto;
-        padding: .5rem 3.2rem;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 3.2rem;
+    }
+    header {
+        height: 5rem;
+        margin: 2rem auto;
     }
     footer {
-        display: flex;
-        height: 4.5rem;
-        width: 100%;
-        // max-width: 1440px;
-        margin: 0 auto .75rem auto;
-        padding: .5rem 3.2rem;
+        height: 4rem;
+        margin: 1.25rem auto;
     }
     main {
         flex: 1 0 auto;
@@ -90,8 +99,6 @@ content {
 }
 
 header {
-    align-items: center;
-    // justify-content: center;
     .logo {
         display: flex;
         align-items: center;
@@ -108,11 +115,52 @@ header {
             width: auto;
         }
     }
+    .btn-menu {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        circle {
+            @include sameSize(3.6rem);
+            background: transparent;
+            border: .35rem solid var(--text-color);
+            border-radius: 100%;
+            animation: breathing 3s infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            dot {
+                @include sameSize(2.2rem);
+                border-radius: 100%;
+                background: var(--text-color);
+                transform: scale(0);
+            }
+        }
+        &:hover, &:focus, &:active {
+            circle {
+                animation: unset;
+            }
+        }
+        &:active {
+            circle {
+                transform: scale(.65);
+            }
+        }
+    }
+}
+
+body.open-menu {
+    header .btn-menu {
+        circle {
+            animation: unset;
+            dot {
+                transform: scale(1);
+            }
+        }
+    }
 }
 
 footer {
-    align-items: center;
-    justify-content: space-between;
     font-size: 1.4rem;
     > about, > github {
         display: flex;

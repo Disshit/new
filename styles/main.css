@@ -1,7 +1,15 @@
+@keyframes breathing {
+  0%, 15%, 85%, 100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.2;
+  }
+}
 * {
   scrollbar-width: thin !important;
   scrollbar-color: var(--accent-color) rgba(0, 0, 0, 0) !important;
-  transition-duration: 0.15s;
+  transition-duration: 0.1s;
   transition-timing-function: ease-in-out;
   outline: none;
   -webkit-tap-highlight-color: transparent;
@@ -67,28 +75,26 @@ content {
   height: 100%;
   width: 100%;
 }
-content header {
+content header, content footer {
   display: flex;
-  height: 5.5rem;
   width: 100%;
-  margin: 1.5rem auto 0 auto;
-  padding: 0.5rem 3.2rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 3.2rem;
+}
+content header {
+  height: 5rem;
+  margin: 2rem auto;
 }
 content footer {
-  display: flex;
-  height: 4.5rem;
-  width: 100%;
-  margin: 0 auto 0.75rem auto;
-  padding: 0.5rem 3.2rem;
+  height: 4rem;
+  margin: 1.25rem auto;
 }
 content main {
   flex: 1 0 auto;
   display: flex;
 }
 
-header {
-  align-items: center;
-}
 header .logo {
   display: flex;
   align-items: center;
@@ -106,10 +112,45 @@ header .logo svg {
   height: 100%;
   width: auto;
 }
+header .btn-menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+header .btn-menu circle {
+  height: 3.6rem;
+  width: 3.6rem;
+  background: transparent;
+  border: 0.35rem solid var(--text-color);
+  border-radius: 100%;
+  animation: breathing 3s infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+header .btn-menu circle dot {
+  height: 2.2rem;
+  width: 2.2rem;
+  border-radius: 100%;
+  background: var(--text-color);
+  transform: scale(0);
+}
+header .btn-menu:hover circle, header .btn-menu:focus circle, header .btn-menu:active circle {
+  animation: unset;
+}
+header .btn-menu:active circle {
+  transform: scale(0.65);
+}
+
+body.open-menu header .btn-menu circle {
+  animation: unset;
+}
+body.open-menu header .btn-menu circle dot {
+  transform: scale(1);
+}
 
 footer {
-  align-items: center;
-  justify-content: space-between;
   font-size: 1.4rem;
 }
 footer > about, footer > github {
