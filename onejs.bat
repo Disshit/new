@@ -13,19 +13,18 @@ if exist "%outputMIN%" del "%outputMIN%"
 set "inputMIN=%cdir%scripts\oneJS\*.min.js"
 
 for %%f in ("%inputMAX%") do (
-	if exist "%%f" (
-		(
-			type "%%f"
-			echo.
-			echo.
-		) >> "%outputMAX%"
-	)
+    if exist "%%f" (
+        (   type "%%f"
+            echo.
+            echo.
+        ) >> "%outputMAX%"
+    )
 )
 
 for %%f in ("%inputMIN%") do (
-	if exist "%%f" (
-		type "%%f" >> "%outputMIN%"
-	)
+    if exist "%%f" (
+        type "%%f" >> "%outputMIN%"
+    )
 )
 
 endlocal
