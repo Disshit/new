@@ -9,8 +9,6 @@
 * {
   scrollbar-width: thin !important;
   scrollbar-color: var(--accent-color) rgba(0, 0, 0, 0) !important;
-  transition-duration: 0.1s;
-  transition-timing-function: ease-in-out;
   outline: none;
   -webkit-tap-highlight-color: transparent;
 }
@@ -26,6 +24,8 @@
 }
 *, *::before, *::after {
   box-sizing: border-box;
+  transition-duration: 0.1s;
+  transition-timing-function: ease-in-out;
 }
 
 ::-moz-selection {
@@ -160,4 +160,111 @@ footer > about, footer > github {
 footer > about > a, footer > github > a {
   display: flex;
   gap: 0.6rem;
+}
+
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+main section {
+  height: 100%;
+  max-height: 60rem;
+  width: calc(100% - 4.5rem);
+  max-width: 80rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+main section form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+main section form .input {
+  --_height: 5.4rem;
+  --_font-size: 2rem;
+  --_padding: 2.2rem;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background: var(--bg-mid);
+  border-radius: 0.8rem;
+  border: 1px solid var(--border-color);
+  z-index: 0;
+}
+main section form .input label {
+  position: absolute;
+  left: var(--_padding);
+  opacity: 0.35;
+  font-style: italic;
+}
+main section form .input input[type=text] {
+  width: 1px;
+  flex: 1 0 auto;
+  background: transparent;
+  border: 0;
+  height: var(--_height);
+  font-family: var(--mono);
+  font-size: var(--_font-size);
+  padding: 0 0 0 var(--_padding);
+  color: var(--text-color);
+  position: relative;
+  z-index: 1;
+}
+main section form .input .btn-clear, main section form .input .btn-send {
+  --_font-size: 1.8rem;
+  height: var(--_height);
+  font-size: var(--_font-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--_padding);
+}
+main section form .input .btn-clear, main section form .input .btn-clear i, main section form .input .btn-send, main section form .input .btn-send i {
+  line-height: 1;
+}
+main section form .input .btn-send {
+  position: relative;
+  z-index: 1;
+  cursor: not-allowed;
+}
+main section form .input .btn-clear {
+  transform: scale(0);
+  position: absolute;
+  right: calc(var(--_padding) * 2 + var(--_font-size));
+  z-index: 0;
+}
+main section form .input .btn-clear:hover, main section form .input .btn-clear:focus {
+  color: var(--accent-color);
+}
+main section form.text .btn-clear {
+  transform: scale(1);
+  position: relative;
+  right: unset;
+  z-index: 1;
+}
+main section form.text .btn-send {
+  background: var(--border-color);
+}
+main section form.text .btn-send:hover, main section form.text .btn-send:focus {
+  color: var(--accent-color);
+}
+main section form.text .btn-send:hover i, main section form.text .btn-send:focus i {
+  transform: scale(1.1);
+}
+main section form.text .btn-clear, main section form.text .btn-send {
+  cursor: pointer;
+}
+main section form.text .btn-clear:active i, main section form.text .btn-send:active i {
+  transform: scale(0.65);
+}
+main section form.text label {
+  display: none;
 }/*# sourceMappingURL=main.css.map */

@@ -5,6 +5,25 @@ $globalduration: .1s;
     width: $size;
 }
 
+@mixin nongradient($color) {
+    background-color: $color;
+    background: linear-gradient(-45deg, $color 25%, $color 72.5%);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@mixin gradient() {
+    background-color: var(--accent-color);
+    background: linear-gradient(-45deg, var(--accent-deep) 25%, var(--accent-lite) 72.5%);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@mixin bgradint() {
+    background-color: var(--accent-color);
+    background: linear-gradient(-45deg, var(--accent-deep) 25%, var(--accent-lite) 72.5%);
+}
+
 
 @keyframes breathing {
     0%, 15%, 85%, 100% {
@@ -19,8 +38,6 @@ $globalduration: .1s;
 * {
     scrollbar-width: thin !important;
     scrollbar-color: var(--accent-color) #00000000 !important;
-    transition-duration: $globalduration;
-    transition-timing-function: ease-in-out;
     outline: none;
     -webkit-tap-highlight-color: transparent;
     &::-webkit-scrollbar {
@@ -35,6 +52,8 @@ $globalduration: .1s;
     }
     &, &::before, &::after {
         box-sizing: border-box;
+        transition-duration: $globalduration;
+        transition-timing-function: ease-in-out;
     }
 }
 
@@ -168,6 +187,116 @@ footer {
         > a {
             display: flex;
             gap: .6rem;
+        }
+    }
+}
+
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    section {
+        height: 100%;
+        max-height: 60rem;
+        width: calc(100% - 4.5rem);
+        max-width: 80rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            .input {
+                --_height: 5.4rem;
+                --_font-size: 2rem;
+                --_padding: 2.2rem;
+                // --_h-padding: calc((var(--_height) - var(--_font-size)) / 2);
+                overflow: hidden;
+                position: relative;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                background: var(--bg-mid);
+                border-radius: .8rem;
+                border: 1px solid var(--border-color);
+                z-index: 0;
+                label {
+                    position: absolute;
+                    left: var(--_padding);
+                    opacity: .35;
+                    font-style: italic;
+                }
+                input[type="text"] {
+                    width: 1px;
+                    flex: 1 0 auto;
+                    background: transparent;
+                    border: 0;
+                    height: var(--_height);
+                    font-family: var(--mono);
+                    font-size: var(--_font-size);
+                    padding: 0 0 0 var(--_padding);
+                    color: var(--text-color);
+                    position: relative;
+                    z-index: 1;
+                }
+                .btn-clear, .btn-send {
+                    --_font-size: 1.8rem;
+                    height: var(--_height);
+                    font-size: var(--_font-size);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 0 var(--_padding);
+                    &, i {
+                        line-height: 1;
+                    }
+                }
+                .btn-send {
+                    position: relative;
+                    z-index: 1;
+                    cursor: not-allowed;
+                }
+                .btn-clear {
+                    transform: scale(0);
+                    position: absolute;
+                    right: calc(var(--_padding) * 2 + var(--_font-size));
+                    z-index: 0;
+                    &:hover, &:focus {
+                        color: var(--accent-color);
+                    }
+                }
+            }
+            &.text {
+                .btn-clear {
+                    transform: scale(1);
+                    position: relative;
+                    right: unset;
+                    z-index: 1;
+                }
+                .btn-send {
+                    background: var(--border-color);
+                    &:hover, &:focus {
+                        color: var(--accent-color);
+                        i {
+                            transform: scale(1.1);
+                        }
+                    }
+                }
+                .btn-clear, .btn-send {
+                    cursor: pointer;
+                    &:active i {
+                        transform: scale(.65);
+                    }
+                }
+                label {
+                    display: none;
+                }
+            }
         }
     }
 }

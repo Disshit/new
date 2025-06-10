@@ -6,9 +6,10 @@ const darkTheme = `
         --accent-lite: #f2d230;
         --accent-deep: #e56000;
         --text-color: #f8fafc;
-        --bg-deep: #202124;
-        --bg-mid: #28292a;
-        --bg-lite: #2d2f31;
+        --border-color: #282828;
+        --bg-deep: #161616;
+        --bg-mid: #1c1c1c;
+        --bg-lite: #333333;
     }
 `;
 

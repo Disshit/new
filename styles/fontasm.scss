@@ -1,4 +1,4 @@
-$version: 20250505225839;
+$version: 20250511022923;
 
 @font-face {
     font-family: 'Fontasm';
@@ -21,6 +21,12 @@ $version: 20250505225839;
     }
     &.fa-dissite::before {
         content: '\E001';
+    }
+    &.fa-send::before {
+        content: '\E002';
+    }
+    &.fa-clear::before {
+        content: '\E003';
     }
     &.fa-github::before {
         content: '\E006';
