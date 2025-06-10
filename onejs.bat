@@ -1,4 +1,4 @@
-:: Compile all scripts files into One.
+:: Compile all scripts into One.
 @echo off
 setlocal
 
