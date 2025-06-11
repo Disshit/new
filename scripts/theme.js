@@ -1,15 +1,22 @@
 /* Light theme should be updated later. Delete this when done. */
 
+// https://stackoverflow.com/a/57401891
+function reShade(color, amount) {
+    return '#' + color.replace(/^#/, '').replace(/../g, color => ('0'+Math.min(255, Math.max(0, parseInt(color, 16) + amount)).toString(16)).slice(-2));
+}
+
 const darkTheme = `
     html, html[data-dark="default"] {
         --accent-color: #ec9918;
         --accent-lite: #f2d230;
         --accent-deep: #e56000;
         --text-color: #f8fafc;
-        --border-color: #282828;
         --bg-deep: #161616;
-        --bg-mid: #1c1c1c;
-        --bg-lite: #333333;
+        --bg-mid: ${reShade('#161616', 6)};
+        --bg-mid-h: ${reShade('#161616', 11)};
+        --bg-mid-hh: ${reShade('#161616', 18)};
+        --bg-lite: ${reShade('#161616', 29)};
+        --border-color: ${reShade('#161616', 18)};
     }
 `;
 

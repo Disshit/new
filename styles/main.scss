@@ -5,7 +5,7 @@ $globalduration: .1s;
     width: $size;
 }
 
-@mixin nongradient($color) {
+@mixin ngradient($color) {
     background-color: $color;
     background: linear-gradient(-45deg, $color 25%, $color 72.5%);
     background-clip: text;
@@ -201,19 +201,21 @@ main {
         width: calc(100% - 4.5rem);
         max-width: 80rem;
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
+        gap: 3.2rem;
         form {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             width: 100%;
+            gap: 3.2rem;
             .input {
                 --_height: 5.4rem;
                 --_font-size: 2rem;
                 --_padding: 2.2rem;
-                // --_h-padding: calc((var(--_height) - var(--_font-size)) / 2);
                 overflow: hidden;
                 position: relative;
                 display: flex;
@@ -270,6 +272,9 @@ main {
                         color: var(--accent-color);
                     }
                 }
+                &:focus-within {
+                    background: var(--bg-mid-h);
+                }
             }
             &.text {
                 .btn-clear {
@@ -279,9 +284,10 @@ main {
                     z-index: 1;
                 }
                 .btn-send {
-                    background: var(--border-color);
+                    background: var(--bg-mid-hh);
                     &:hover, &:focus {
-                        color: var(--accent-color);
+                        color: var(--bg-mid-hh);
+                        background: var(--accent-color);
                         i {
                             transform: scale(1.1);
                         }
@@ -295,6 +301,29 @@ main {
                 }
                 label {
                     display: none;
+                }
+            }
+            sub {
+                display: flex;
+                justify-content: center;
+                width: 100%;
+                gap: 3.2rem;
+            }
+            .options {
+                font-size: 1.6rem;
+                position: relative;
+                display: flex;
+                gap: 1rem;
+                width: calc(100% - 4.5rem);
+                max-width: 20rem;
+                ul {
+                    list-style-type: none;
+                    padding: 0;
+                    margin: 0;
+                    display: flex;
+                    flex-direction: column;
+                    position: absolute;
+                    top: 100%;
                 }
             }
         }

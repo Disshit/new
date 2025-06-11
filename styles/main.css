@@ -173,8 +173,10 @@ main section {
   width: calc(100% - 4.5rem);
   max-width: 80rem;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 3.2rem;
 }
 main section form {
   display: flex;
@@ -182,6 +184,7 @@ main section form {
   align-items: center;
   justify-content: center;
   width: 100%;
+  gap: 3.2rem;
 }
 main section form .input {
   --_height: 5.4rem;
@@ -244,6 +247,9 @@ main section form .input .btn-clear {
 main section form .input .btn-clear:hover, main section form .input .btn-clear:focus {
   color: var(--accent-color);
 }
+main section form .input:focus-within {
+  background: var(--bg-mid-h);
+}
 main section form.text .btn-clear {
   transform: scale(1);
   position: relative;
@@ -251,10 +257,11 @@ main section form.text .btn-clear {
   z-index: 1;
 }
 main section form.text .btn-send {
-  background: var(--border-color);
+  background: var(--bg-mid-hh);
 }
 main section form.text .btn-send:hover, main section form.text .btn-send:focus {
-  color: var(--accent-color);
+  color: var(--bg-mid-hh);
+  background: var(--accent-color);
 }
 main section form.text .btn-send:hover i, main section form.text .btn-send:focus i {
   transform: scale(1.1);
@@ -267,4 +274,27 @@ main section form.text .btn-clear:active i, main section form.text .btn-send:act
 }
 main section form.text label {
   display: none;
+}
+main section form sub {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  gap: 3.2rem;
+}
+main section form .options {
+  font-size: 1.6rem;
+  position: relative;
+  display: flex;
+  gap: 1rem;
+  width: calc(100% - 4.5rem);
+  max-width: 20rem;
+}
+main section form .options ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
 }/*# sourceMappingURL=main.css.map */
