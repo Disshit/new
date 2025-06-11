@@ -1,4 +1,4 @@
-$version: 20250511022923;
+$version: 20250512015347;
 
 @font-face {
     font-family: 'Fontasm';
@@ -28,7 +28,19 @@ $version: 20250511022923;
     &.fa-clear::before {
         content: '\E003';
     }
+    &.fa-down::before {
+        content: '\E004';
+    }
+    &.fa-tick::before {
+        content: '\E005';
+    }
     &.fa-github::before {
         content: '\E006';
+    }
+    &.fa-security::before {
+        content: '\E007';
+    }
+    &.fa-shortening::before {
+        content: '\E008';
     }
 }

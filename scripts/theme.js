@@ -11,12 +11,11 @@ const darkTheme = `
         --accent-lite: #f2d230;
         --accent-deep: #e56000;
         --text-color: #f8fafc;
-        --bg-deep: #161616;
-        --bg-mid: ${reShade('#161616', 6)};
-        --bg-mid-h: ${reShade('#161616', 11)};
-        --bg-mid-hh: ${reShade('#161616', 18)};
-        --bg-lite: ${reShade('#161616', 29)};
-        --border-color: ${reShade('#161616', 18)};
+        --bg-deep: #212121;
+        --bg-lite: ${reShade('#212121', 6)};
+        --bg-lite-h: ${reShade('#212121', 11)};
+        --bg-lite-hh: ${reShade('#212121', 18)};
+        --border-color: ${reShade('#212121', 18)};
     }
 `;
 

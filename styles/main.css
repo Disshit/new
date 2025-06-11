@@ -43,7 +43,7 @@ a, a:visited {
   text-decoration: none;
 }
 
-header, footer, sidebar, menubar {
+header, footer, .options, form label {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -197,7 +197,7 @@ main section form .input {
   align-items: center;
   justify-content: center;
   width: 100%;
-  background: var(--bg-mid);
+  background: var(--bg-lite);
   border-radius: 0.8rem;
   border: 1px solid var(--border-color);
   z-index: 0;
@@ -248,7 +248,7 @@ main section form .input .btn-clear:hover, main section form .input .btn-clear:f
   color: var(--accent-color);
 }
 main section form .input:focus-within {
-  background: var(--bg-mid-h);
+  background: var(--bg-lite-h);
 }
 main section form.text .btn-clear {
   transform: scale(1);
@@ -257,10 +257,10 @@ main section form.text .btn-clear {
   z-index: 1;
 }
 main section form.text .btn-send {
-  background: var(--bg-mid-hh);
+  background: var(--bg-lite-hh);
 }
 main section form.text .btn-send:hover, main section form.text .btn-send:focus {
-  color: var(--bg-mid-hh);
+  color: var(--bg-lite-hh);
   background: var(--accent-color);
 }
 main section form.text .btn-send:hover i, main section form.text .btn-send:focus i {
@@ -282,19 +282,56 @@ main section form sub {
   gap: 3.2rem;
 }
 main section form .options {
-  font-size: 1.6rem;
+  --_font-size: 1.6rem;
+  --_height: 5rem;
+  --_padding: 2.2rem;
+  font-size: var(--_font-size);
   position: relative;
-  display: flex;
-  gap: 1rem;
+  height: var(--_height);
   width: calc(100% - 4.5rem);
-  max-width: 20rem;
+  max-width: 30rem;
+  background: var(--bg-lite);
+  border-radius: 0.8rem;
+  padding: 0 var(--_padding);
+  cursor: pointer;
+}
+main section form .options div {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--_padding) / 2);
+}
+main section form .options div span:not(.value) {
+  flex: 1 0 auto;
+}
+main section form .options div span:not(.value)::after {
+  content: ":";
+  margin-left: 1px;
 }
 main section form .options ul {
+  width: 100%;
   list-style-type: none;
-  padding: 0;
+  padding: calc(var(--_padding) / 2) 0;
   margin: 0;
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 100%;
+  top: calc(100% + 4px);
+  left: 0;
+  background: var(--bg-lite);
+  border-radius: 0.8rem;
+  overflow: hidden;
+}
+main section form .options ul li {
+  height: var(--_height);
+  width: 100%;
+  padding: 0 var(--_padding) 0 calc(var(--_padding) / 2 * 3 + var(--_font-size));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+main section form .options ul li:hover, main section form .options ul li:focus {
+  background: var(--bg-lite-hh);
 }/*# sourceMappingURL=main.css.map */

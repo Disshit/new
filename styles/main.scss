@@ -1,4 +1,5 @@
 $globalduration: .1s;
+$globalradius: .8rem;
 
 @mixin sameSize($size) {
     height: $size;
@@ -69,7 +70,7 @@ a {
     }
 }
 
-header, footer, sidebar, menubar {
+header, footer, .options, form label {
     -webkit-touch-callout: none;
     user-select: none;
 }
@@ -223,8 +224,8 @@ main {
                 align-items: center;
                 justify-content: center;
                 width: 100%;
-                background: var(--bg-mid);
-                border-radius: .8rem;
+                background: var(--bg-lite);
+                border-radius: $globalradius;
                 border: 1px solid var(--border-color);
                 z-index: 0;
                 label {
@@ -273,7 +274,7 @@ main {
                     }
                 }
                 &:focus-within {
-                    background: var(--bg-mid-h);
+                    background: var(--bg-lite-h);
                 }
             }
             &.text {
@@ -284,9 +285,9 @@ main {
                     z-index: 1;
                 }
                 .btn-send {
-                    background: var(--bg-mid-hh);
+                    background: var(--bg-lite-hh);
                     &:hover, &:focus {
-                        color: var(--bg-mid-hh);
+                        color: var(--bg-lite-hh);
                         background: var(--accent-color);
                         i {
                             transform: scale(1.1);
@@ -310,20 +311,60 @@ main {
                 gap: 3.2rem;
             }
             .options {
-                font-size: 1.6rem;
+                --_font-size: 1.6rem;
+                --_height: 5rem;
+                --_padding: 2.2rem;
+                font-size: var(--_font-size);
                 position: relative;
-                display: flex;
-                gap: 1rem;
+                height: var(--_height);
                 width: calc(100% - 4.5rem);
-                max-width: 20rem;
+                max-width: 30rem;
+                background: var(--bg-lite);
+                border-radius: $globalradius;
+                padding: 0 var(--_padding);
+                cursor: pointer;
+                div {
+                    @include sameSize(100%);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: calc(var(--_padding) / 2);
+                    span {
+                        &:not(.value) {
+                            flex: 1 0 auto;
+                            &::after {
+                                content: ':';
+                                margin-left: 1px;
+                            }
+                        }
+                        &.value {
+                        }
+                    }
+                }
                 ul {
+                    width: 100%;
                     list-style-type: none;
-                    padding: 0;
+                    padding: calc(var(--_padding) / 2) 0;
                     margin: 0;
                     display: flex;
                     flex-direction: column;
                     position: absolute;
-                    top: 100%;
+                    top: calc(100% + 4px);
+                    left: 0;
+                    background: var(--bg-lite);
+                    border-radius: $globalradius;
+                    overflow: hidden;
+                    li {
+                        height: var(--_height);
+                        width: 100%;
+                        padding: 0 var(--_padding) 0 calc((var(--_padding) / 2 * 3) + var(--_font-size));
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        &:hover, &:focus {
+                            background: var(--bg-lite-hh);
+                        }
+                    }
                 }
             }
         }
