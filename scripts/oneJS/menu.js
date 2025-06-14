@@ -1,7 +1,39 @@
-// Toggle the menu open and close
-function menuClick() {
-    document.body.classList.toggle('open-menu');
-}
+// Global listener for menu-like events
+document.addEventListener('click', (e) => {
+    // Open and close main menu
+    if (e.target.closest('.btn-menu')) {
+        document.body.classList.toggle('open-menu');
+    }
 
-// Listen for menu button click
-document.querySelector('header .btn-menu').addEventListener('click', menuClick);
+    // Toggle drop down menus
+    if (e.target.closest('.op-button')) {
+        e.target.closest('option').classList.toggle('expanded');
+
+        // Close overlapping menu on smaller displays
+        let computedStyle = window.getComputedStyle(document.querySelector('sub'));
+        if (computedStyle.getPropertyValue('flex-direction').match('column')) {
+            document.querySelector(`option:not([data-type="${e.target.closest('option').getAttribute('data-type')}"])`).classList.remove('expanded');
+        }
+    }
+
+    // Update drop down menu selection and close them
+    if (e.target.closest('li')) {
+        e.target.closest('option').querySelector('.value').textContent = e.target.closest('li').querySelector('span').textContent;
+        localStorage.setItem(e.target.closest('option').getAttribute('data-type'), e.target.closest('li').querySelector('span').textContent);
+        try {
+            e.target.closest('ul').querySelector('li.active').classList.remove('active');
+        } catch {}
+        e.target.closest('li').classList.add('active');
+        setTimeout(() => {
+            e.target.closest('option').classList.remove('expanded');
+        }, 50);
+    }
+
+    // Close if clicks are outside the option element
+    if (!e.target.closest('option')) {
+        let options = document.querySelectorAll('option');
+        for (let x = 0; x < options.length; x++) {
+            options[x].classList.remove('expanded');
+        }
+    }
+});

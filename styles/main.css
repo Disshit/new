@@ -56,6 +56,11 @@ html {
   --logo: "Cuprum", sans-serif;
   font-size: 10px;
 }
+@media screen and (max-width: 768px) {
+  html {
+    font-size: 9px;
+  }
+}
 html, html body {
   height: 100%;
   width: 100%;
@@ -184,7 +189,7 @@ main section form {
   align-items: center;
   justify-content: center;
   width: 100%;
-  gap: 3.2rem;
+  gap: 4.8rem;
 }
 main section form .input {
   --_height: 5.4rem;
@@ -278,10 +283,17 @@ main section form.text label {
 main section form sub {
   display: flex;
   justify-content: center;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   gap: 3.2rem;
 }
-main section form .options {
+@media screen and (max-width: 640px) {
+  main section form sub {
+    flex-direction: column;
+  }
+}
+main section form option {
   --_font-size: 1.6rem;
   --_height: 5rem;
   --_padding: 2.2rem;
@@ -290,41 +302,58 @@ main section form .options {
   height: var(--_height);
   width: calc(100% - 4.5rem);
   max-width: 30rem;
-  background: var(--bg-lite);
   border-radius: 0.8rem;
-  padding: 0 var(--_padding);
+  padding: 0;
   cursor: pointer;
 }
-main section form .options div {
+main section form option div.op-button {
+  height: 100%;
+  width: 100%;
+}
+main section form option div.op-button div {
   height: 100%;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: calc(var(--_padding) / 2);
+  padding: 0 var(--_padding);
+  background: var(--bg-lite);
+  border-radius: 0.8rem;
 }
-main section form .options div span:not(.value) {
+main section form option div.op-button div span:not(.value) {
   flex: 1 0 auto;
 }
-main section form .options div span:not(.value)::after {
+main section form option div.op-button div span:not(.value)::after {
   content: ":";
   margin-left: 1px;
 }
-main section form .options ul {
-  width: 100%;
-  list-style-type: none;
-  padding: calc(var(--_padding) / 2) 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
+main section form option div.op-button div:hover, main section form option div.op-button div:focus {
+  background: var(--bg-lite-h);
+}
+main section form option div.op-button:active div {
+  transform: translateY(0.4rem);
+}
+main section form option div.op-list {
   position: absolute;
   top: calc(100% + 4px);
   left: 0;
+  width: 100%;
+  overflow: hidden;
+  height: 0;
+}
+main section form option div.op-list ul {
+  height: calc(var(--_height) * var(--_count) + (var(--_padding)));
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
   background: var(--bg-lite);
   border-radius: 0.8rem;
   overflow: hidden;
 }
-main section form .options ul li {
+main section form option div.op-list ul li {
   height: var(--_height);
   width: 100%;
   padding: 0 var(--_padding) 0 calc(var(--_padding) / 2 * 3 + var(--_font-size));
@@ -332,6 +361,18 @@ main section form .options ul li {
   align-items: center;
   justify-content: space-between;
 }
-main section form .options ul li:hover, main section form .options ul li:focus {
+main section form option div.op-list ul li:hover, main section form option div.op-list ul li:focus {
   background: var(--bg-lite-hh);
+}
+main section form option div.op-list ul li:first-child {
+  margin-top: calc(var(--_padding) / 2);
+}
+main section form option div.op-list ul li:last-child {
+  margin-bottom: calc(var(--_padding) / 2);
+}
+main section form option div.op-list ul li:not(.active) .fa {
+  display: none;
+}
+main section form option.expanded .op-list {
+  height: calc(var(--_height) * var(--_count) + (var(--_padding)));
 }/*# sourceMappingURL=main.css.map */

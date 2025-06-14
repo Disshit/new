@@ -1,3 +1,9 @@
+$sm: 640px;
+$md: 768px;
+$lg: 1024px;
+$xl: 1280px;
+$xxl: 1536px;
+
 $globalduration: .1s;
 $globalradius: .8rem;
 
@@ -6,25 +12,11 @@ $globalradius: .8rem;
     width: $size;
 }
 
-@mixin ngradient($color) {
-    background-color: $color;
-    background: linear-gradient(-45deg, $color 25%, $color 72.5%);
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+@mixin fontSize($fSize, $mWidth) {
+    @media screen and (max-width: $mWidth) {
+        font-size: $fSize;
+    }
 }
-
-@mixin gradient() {
-    background-color: var(--accent-color);
-    background: linear-gradient(-45deg, var(--accent-deep) 25%, var(--accent-lite) 72.5%);
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-@mixin bgradint() {
-    background-color: var(--accent-color);
-    background: linear-gradient(-45deg, var(--accent-deep) 25%, var(--accent-lite) 72.5%);
-}
-
 
 @keyframes breathing {
     0%, 15%, 85%, 100% {
@@ -80,6 +72,7 @@ html {
     --mono: 'Courier Prime', monospace;
     --logo: 'Cuprum', sans-serif;
     font-size: 10px;
+    @include fontSize(9px, $md);
     &, body {
         @include sameSize(100%);
     }
@@ -212,7 +205,7 @@ main {
             align-items: center;
             justify-content: center;
             width: 100%;
-            gap: 3.2rem;
+            gap: 4.8rem;
             .input {
                 --_height: 5.4rem;
                 --_font-size: 2rem;
@@ -307,10 +300,15 @@ main {
             sub {
                 display: flex;
                 justify-content: center;
+                align-items: center;
+                justify-content: center;
                 width: 100%;
                 gap: 3.2rem;
+                @media screen and (max-width: $sm) {
+                    flex-direction: column;
+                }
             }
-            .options {
+            option {
                 --_font-size: 1.6rem;
                 --_height: 5rem;
                 --_padding: 2.2rem;
@@ -319,52 +317,84 @@ main {
                 height: var(--_height);
                 width: calc(100% - 4.5rem);
                 max-width: 30rem;
-                background: var(--bg-lite);
                 border-radius: $globalradius;
-                padding: 0 var(--_padding);
+                padding: 0;
                 cursor: pointer;
-                div {
+                div.op-button {
                     @include sameSize(100%);
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    gap: calc(var(--_padding) / 2);
-                    span {
-                        &:not(.value) {
-                            flex: 1 0 auto;
-                            &::after {
-                                content: ':';
-                                margin-left: 1px;
+                    div {
+                        @include sameSize(100%);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: calc(var(--_padding) / 2);
+                        padding: 0 var(--_padding);
+                        background: var(--bg-lite);
+                        border-radius: $globalradius;
+                        span {
+                            &:not(.value) {
+                                flex: 1 0 auto;
+                                &::after {
+                                    content: ':';
+                                    margin-left: 1px;
+                                }
+                            }
+                            &.value {
                             }
                         }
-                        &.value {
+                        &:hover, &:focus {
+                            background: var(--bg-lite-h);
+                        }
+                    }
+                    &:active {
+                        div {
+                            transform: translateY(.4rem);
                         }
                     }
                 }
-                ul {
-                    width: 100%;
-                    list-style-type: none;
-                    padding: calc(var(--_padding) / 2) 0;
-                    margin: 0;
-                    display: flex;
-                    flex-direction: column;
+                div.op-list {
                     position: absolute;
                     top: calc(100% + 4px);
                     left: 0;
-                    background: var(--bg-lite);
-                    border-radius: $globalradius;
+                    width: 100%;
                     overflow: hidden;
-                    li {
-                        height: var(--_height);
-                        width: 100%;
-                        padding: 0 var(--_padding) 0 calc((var(--_padding) / 2 * 3) + var(--_font-size));
+                    height: 0;
+                    ul {
+                        height: calc((var(--_height) * var(--_count)) + (var(--_padding)));
+                        list-style-type: none;
+                        padding: 0;
+                        margin: 0;
                         display: flex;
-                        align-items: center;
-                        justify-content: space-between;
-                        &:hover, &:focus {
-                            background: var(--bg-lite-hh);
+                        flex-direction: column;
+                        background: var(--bg-lite);
+                        border-radius: $globalradius;
+                        overflow: hidden;
+                        li {
+                            height: var(--_height);
+                            width: 100%;
+                            padding: 0 var(--_padding) 0 calc((var(--_padding) / 2 * 3) + var(--_font-size));
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                            &:hover, &:focus {
+                                background: var(--bg-lite-hh);
+                            }
+                            &:first-child {
+                                margin-top: calc(var(--_padding) / 2);
+                            }
+                            &:last-child {
+                                margin-bottom: calc(var(--_padding) / 2);
+                            }
+                            &:not(.active) {
+                                .fa {
+                                    display: none;
+                                }
+                            }
                         }
                     }
+                }
+                &.expanded .op-list {
+                    height: calc((var(--_height) * var(--_count)) + (var(--_padding)));
                 }
             }
         }
