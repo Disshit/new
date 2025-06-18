@@ -1,9 +1,9 @@
 /* Basic Base64 conversion for strings */
 // https://stackoverflow.com/a/30106551
 
-function enCode(str) {
+function enCode(string) {
     return btoa(
-        encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,
+        encodeURIComponent(string).replace(/%([0-9A-F]{2})/g,
             function toSolidBytes(match, p1) {
                 return String.fromCharCode('0x' + p1);
             }
@@ -11,9 +11,9 @@ function enCode(str) {
     );
 }
 
-function deCode(str) {
+function deCode(string) {
     return decodeURIComponent(
-        atob(str).split('').map(function (c) {
+        atob(string).split('').map(function (c) {
             return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
         }).join('')
     );
