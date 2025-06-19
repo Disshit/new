@@ -19,6 +19,7 @@ document.addEventListener('click', (e) => {
     // Update drop down menu selection and close them
     if (e.target.closest('li')) {
         e.target.closest('option').querySelector('.value').textContent = e.target.closest('li').querySelector('span').textContent;
+        e.target.closest('option').querySelector('input').value = e.target.closest('li').querySelector('span').textContent;
         localStorage.setItem(e.target.closest('option').getAttribute('data-type'), e.target.closest('li').querySelector('span').textContent);
         try {
             e.target.closest('ul').querySelector('li.active').classList.remove('active');

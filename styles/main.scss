@@ -333,13 +333,14 @@ main {
                         border-radius: $globalradius;
                         span {
                             &:not(.value) {
-                                flex: 1 0 auto;
                                 &::after {
                                     content: ':';
                                     margin-left: 1px;
                                 }
                             }
                             &.value {
+                                text-align: right;
+                                flex: 1 0 auto;
                             }
                         }
                         &:hover, &:focus {
@@ -396,6 +397,15 @@ main {
                 &.expanded .op-list {
                     height: calc((var(--_height) * var(--_count)) + (var(--_padding)));
                 }
+            }
+            input.disabled {
+                height: 0;
+                width: 0;
+                padding: 0;
+                border: 0;
+                position: fixed;
+                top: -200svh;
+                left: -200svw;
             }
         }
     }

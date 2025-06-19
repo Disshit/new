@@ -24,9 +24,7 @@
    <meta name="darkreader-lock">
 
    <link rel="stylesheet" type="text/css" href="styles/fontasm.min.css">
-   <link rel="stylesheet" type="text/css" href="styles/cuprum.min.css">
-   <link rel="stylesheet" type="text/css" href="styles/radiocanada.min.css">
-   <link rel="stylesheet" type="text/css" href="styles/courierprime.min.css">
+   <link rel="stylesheet" type="text/css" href="styles/interface.min.css">
    <link rel="stylesheet" type="text/css" href="styles/main.css">
    <style rel="stylesheet" id="nightCSS"></style>
    <style rel="stylesheet" id="dayCSS"></style>
@@ -46,11 +44,11 @@
    <meta name="twitter:image" content="https://disshit.github.io/app/twitter.png?20250503143029">
    <meta name="twitter:card" content="summary_large_image">
 
-   <script type="text/javascript" src="lib/simplecrypto.min.js"></script>
-   <script type="text/javascript" src="scripts/head/base64.min.js"></script>
+   <script type="text/javascript" src="lib/pako_inflate.min.js"></script>
+   <!-- <script type="text/javascript" src="scripts/head/base64.min.js"></script>
    <script type="text/javascript" src="scripts/head/cypher.min.js"></script>
-   <script type="text/javascript" src="scripts/head/crypto.min.js"></script>
-   <!-- <script type="text/javascript" src="scripts/head.min.js"></script> -->
+   <script type="text/javascript" src="scripts/head/pako.min.js"></script> -->
+   <script type="text/javascript" src="scripts/head.min.js"></script>
    <script type="text/javascript" src="scripts/theme.min.js"></script>
 </head>
 <body>
@@ -68,10 +66,10 @@
       </header>
       <main>
          <section>
-            <form>
+            <form action="/">
                <div class="input">
                   <label>insert disshit</label>
-                  <input type="text" id="inlink">
+                  <input type="text" name="v" id="inlink">
                   <span class="btn-clear">
                      <i class="fa fa-clear"></i>
                   </span>
@@ -85,6 +83,7 @@
                         <div>
                            <i class="fa fa-security"></i>
                            <span>Security</span>
+                           <input type="text" name="z" class="disabled">
                            <span class="value"></span>
                            <i class="fa fa-down"></i>
                         </div>
@@ -104,7 +103,7 @@
                               <i class="fa fa-tick"></i>
                            </li>
                            <li>
-                              <span>Crypto</span>
+                              <span>Pako</span>
                               <i class="fa fa-tick"></i>
                            </li>
                         </ul>
@@ -115,6 +114,7 @@
                         <div>
                            <i class="fa fa-shortening"></i>
                            <span>Shortening</span>
+                           <input type="text" name="x" class="disabled">
                            <span class="value"></span>
                            <i class="fa fa-down"></i>
                         </div>

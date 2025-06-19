@@ -8,21 +8,14 @@ function goIn(arr, displace) {
     return arr[goodIndex];
 }
 
-function getRandom() {
-    let min = 10,
-        max = 99;
-
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
 function enCypher(string, displace) {
     let newString = "";
 
-    for (let x = 0; x < string.length; x++) {
-        if (cases.includes(string[x])) {
-            newString += goIn(cases, cases.indexOf(string[x]) + displace);
+    for (let x = 0; x < String(string).length; x++) {
+        if (cases.includes(String(string)[x])) {
+            newString += goIn(cases, cases.indexOf(String(string)[x]) + displace);
         } else {
-            newString += string[x];
+            newString += String(string)[x];
         }
     }
 
@@ -32,11 +25,11 @@ function enCypher(string, displace) {
 function deCypher(string, displace) {
     let originalString = "";
 
-    for (let x = 0; x < string.length; x++) {
-        if (cases.includes(string[x])) {
-            originalString += goIn(cases, cases.indexOf(string[x]) - displace);
+    for (let x = 0; x < String(string).length; x++) {
+        if (cases.includes(String(string)[x])) {
+            originalString += goIn(cases, cases.indexOf(String(string)[x]) - displace);
         } else {
-            originalString += string[x];
+            originalString += String(string)[x];
         }
     }
 

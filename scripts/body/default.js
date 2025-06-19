@@ -4,10 +4,14 @@ function setActiveOptions() {
         shorteningChoice = localStorage.shortening || 'is.gd';
 
     let security = document.querySelector('option[data-type="security"]'),
-        shortening = document.querySelector('option[data-type="shortening"]');
+        shortening = document.querySelector('option[data-type="shortening"]'),
+        securityInput = security.querySelector('input'),
+        shorteningInput = shortening.querySelector('input');
 
     security.querySelector('.value').textContent = securityChoice;
+    securityInput.value = securityChoice;
     shortening.querySelector('.value').textContent = shorteningChoice;
+    shorteningInput.value = shorteningChoice;
 
     for (let x = 0; x < security.querySelectorAll('.op-list li').length; x++) {
         if (security.querySelectorAll('.op-list li')[x].textContent.match(securityChoice)) {

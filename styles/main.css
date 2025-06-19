@@ -321,12 +321,13 @@ main section form option div.op-button div {
   background: var(--bg-lite);
   border-radius: 0.8rem;
 }
-main section form option div.op-button div span:not(.value) {
-  flex: 1 0 auto;
-}
 main section form option div.op-button div span:not(.value)::after {
   content: ":";
   margin-left: 1px;
+}
+main section form option div.op-button div span.value {
+  text-align: right;
+  flex: 1 0 auto;
 }
 main section form option div.op-button div:hover, main section form option div.op-button div:focus {
   background: var(--bg-lite-h);
@@ -375,4 +376,13 @@ main section form option div.op-list ul li:not(.active) .fa {
 }
 main section form option.expanded .op-list {
   height: calc(var(--_height) * var(--_count) + (var(--_padding)));
+}
+main section form input.disabled {
+  height: 0;
+  width: 0;
+  padding: 0;
+  border: 0;
+  position: fixed;
+  top: -200svh;
+  left: -200svw;
 }/*# sourceMappingURL=main.css.map */
