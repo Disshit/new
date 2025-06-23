@@ -62,6 +62,10 @@ a {
     }
 }
 
+button, ul, li {
+    all: unset;
+}
+
 header, footer, .options, form label {
     -webkit-touch-callout: none;
     user-select: none;
@@ -149,7 +153,7 @@ header {
                 transform: scale(0);
             }
         }
-        &:hover, &:focus, &:active {
+        &:hover, &:focus-visible, &:active {
             circle {
                 animation: unset;
             }
@@ -262,12 +266,16 @@ main {
                     position: absolute;
                     right: calc(var(--_padding) * 2 + var(--_font-size));
                     z-index: 0;
-                    &:hover, &:focus {
+                    &:hover, &:focus-visible {
                         color: var(--accent-color);
                     }
                 }
+                outline: 1px solid transparent;
                 &:focus-within {
                     background: var(--bg-lite-h);
+                }
+                &:has(input[type="text"]:focus-visible) {
+                    outline: 1px solid var(--accent-color);
                 }
             }
             &.text {
@@ -279,7 +287,7 @@ main {
                 }
                 .btn-send {
                     background: var(--bg-lite-hh);
-                    &:hover, &:focus {
+                    &:hover, &:focus-visible {
                         color: var(--bg-lite-hh);
                         background: var(--accent-color);
                         i {
@@ -309,8 +317,8 @@ main {
                 }
             }
             option {
-                --_font-size: 1.6rem;
-                --_height: 5rem;
+                --_font-size: 1.5rem;
+                --_height: 4.8rem;
                 --_padding: 2.2rem;
                 font-size: var(--_font-size);
                 position: relative;
@@ -320,7 +328,7 @@ main {
                 border-radius: $globalradius;
                 padding: 0;
                 cursor: pointer;
-                div.op-button {
+                .op-button {
                     @include sameSize(100%);
                     div {
                         @include sameSize(100%);
@@ -343,7 +351,9 @@ main {
                                 flex: 1 0 auto;
                             }
                         }
-                        &:hover, &:focus {
+                    }
+                    &:hover, &:focus-visible {
+                        div {
                             background: var(--bg-lite-h);
                         }
                     }
@@ -353,7 +363,7 @@ main {
                         }
                     }
                 }
-                div.op-list {
+                .op-list {
                     position: absolute;
                     top: calc(100% + 4px);
                     left: 0;
@@ -362,7 +372,6 @@ main {
                     height: 0;
                     ul {
                         height: calc((var(--_height) * var(--_count)) + (var(--_padding)));
-                        list-style-type: none;
                         padding: 0;
                         margin: 0;
                         display: flex;
@@ -377,7 +386,7 @@ main {
                             display: flex;
                             align-items: center;
                             justify-content: space-between;
-                            &:hover, &:focus {
+                            &:hover, &:focus-visible {
                                 background: var(--bg-lite-hh);
                             }
                             &:first-child {

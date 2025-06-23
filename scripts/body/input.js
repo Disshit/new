@@ -3,8 +3,12 @@ function inputCheck() {
     let intext = document.querySelector('form input[name="v"]');
     if (intext.value !== '') {
         intext.closest('form').classList.add('text');
+        intext.closest('form').querySelector('.btn-clear').removeAttribute('tabindex');
+        intext.closest('form').querySelector('.btn-send').removeAttribute('tabindex');
     } else {
         intext.closest('form').classList.remove('text');
+        intext.closest('form').querySelector('.btn-clear').setAttribute('tabindex','-1');
+        intext.closest('form').querySelector('.btn-send').setAttribute('tabindex','-1');
     }
 }
 
@@ -25,16 +29,4 @@ document.querySelector('form .btn-clear').addEventListener('click', () => {
     clearInput();
     // wait for the click transition to finish
     setTimeout(inputCheck, 100);
-});
-
-// submit button on main form
-document.querySelector('form .btn-send').addEventListener('click', (e) => {
-    e.target.closest('form').submit();
-});
-
-// form submit on Enter
-document.querySelector('form input[name="v"]').addEventListener('keydown', (e) => {
-    if (e.key === "Enter") {
-        e.target.closest('form').submit();
-    }
 });

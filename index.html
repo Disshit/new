@@ -67,19 +67,30 @@
       <main>
          <section>
             <form action="/">
+               <sup>
+                  <span></span>
+                  <ul>
+                     <li>Link</li>
+                     <li>Torrent Magnet</li>
+                     <li>Torrent Hash</li>
+                     <li>Google Drive</li>
+                     <li>Pixeldrain</li>
+                     <li>Download</li>
+                  </ul>
+               </sup>
                <div class="input">
                   <label>insert disshit</label>
-                  <input type="text" name="v" id="inlink">
-                  <span class="btn-clear">
+                  <input type="text" name="v" id="inlink" required="">
+                  <button type="button" class="btn-clear" tabindex="-1">
                      <i class="fa fa-clear"></i>
-                  </span>
-                  <span class="btn-send">
+                  </button>
+                  <button type="submit" class="btn-send" tabindex="-1">
                      <i class="fa fa-send"></i>
-                  </span>
+                  </button>
                </div>
                <sub>
                   <option data-type="security" style="--_count: 4">
-                     <div class="op-button">
+                     <div tabindex="0" role="button" class="op-button">
                         <div>
                            <i class="fa fa-security"></i>
                            <span>Security</span>
@@ -110,7 +121,7 @@
                      </div>
                   </option>
                   <option data-type="shortening" style="--_count: 4">
-                     <div class="op-button">
+                     <div tabindex="0" role="button" class="op-button">
                         <div>
                            <i class="fa fa-shortening"></i>
                            <span>Shortening</span>

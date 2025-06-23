@@ -43,6 +43,10 @@ a, a:visited {
   text-decoration: none;
 }
 
+button, ul, li {
+  all: unset;
+}
+
 header, footer, .options, form label {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -141,7 +145,7 @@ header .btn-menu circle dot {
   background: var(--text-color);
   transform: scale(0);
 }
-header .btn-menu:hover circle, header .btn-menu:focus circle, header .btn-menu:active circle {
+header .btn-menu:hover circle, header .btn-menu:focus-visible circle, header .btn-menu:active circle {
   animation: unset;
 }
 header .btn-menu:active circle {
@@ -206,6 +210,7 @@ main section form .input {
   border-radius: 0.8rem;
   border: 1px solid var(--border-color);
   z-index: 0;
+  outline: 1px solid transparent;
 }
 main section form .input label {
   position: absolute;
@@ -249,11 +254,14 @@ main section form .input .btn-clear {
   right: calc(var(--_padding) * 2 + var(--_font-size));
   z-index: 0;
 }
-main section form .input .btn-clear:hover, main section form .input .btn-clear:focus {
+main section form .input .btn-clear:hover, main section form .input .btn-clear:focus-visible {
   color: var(--accent-color);
 }
 main section form .input:focus-within {
   background: var(--bg-lite-h);
+}
+main section form .input:has(input[type=text]:focus-visible) {
+  outline: 1px solid var(--accent-color);
 }
 main section form.text .btn-clear {
   transform: scale(1);
@@ -264,11 +272,11 @@ main section form.text .btn-clear {
 main section form.text .btn-send {
   background: var(--bg-lite-hh);
 }
-main section form.text .btn-send:hover, main section form.text .btn-send:focus {
+main section form.text .btn-send:hover, main section form.text .btn-send:focus-visible {
   color: var(--bg-lite-hh);
   background: var(--accent-color);
 }
-main section form.text .btn-send:hover i, main section form.text .btn-send:focus i {
+main section form.text .btn-send:hover i, main section form.text .btn-send:focus-visible i {
   transform: scale(1.1);
 }
 main section form.text .btn-clear, main section form.text .btn-send {
@@ -294,8 +302,8 @@ main section form sub {
   }
 }
 main section form option {
-  --_font-size: 1.6rem;
-  --_height: 5rem;
+  --_font-size: 1.5rem;
+  --_height: 4.8rem;
   --_padding: 2.2rem;
   font-size: var(--_font-size);
   position: relative;
@@ -306,11 +314,11 @@ main section form option {
   padding: 0;
   cursor: pointer;
 }
-main section form option div.op-button {
+main section form option .op-button {
   height: 100%;
   width: 100%;
 }
-main section form option div.op-button div {
+main section form option .op-button div {
   height: 100%;
   width: 100%;
   display: flex;
@@ -321,21 +329,21 @@ main section form option div.op-button div {
   background: var(--bg-lite);
   border-radius: 0.8rem;
 }
-main section form option div.op-button div span:not(.value)::after {
+main section form option .op-button div span:not(.value)::after {
   content: ":";
   margin-left: 1px;
 }
-main section form option div.op-button div span.value {
+main section form option .op-button div span.value {
   text-align: right;
   flex: 1 0 auto;
 }
-main section form option div.op-button div:hover, main section form option div.op-button div:focus {
+main section form option .op-button:hover div, main section form option .op-button:focus-visible div {
   background: var(--bg-lite-h);
 }
-main section form option div.op-button:active div {
+main section form option .op-button:active div {
   transform: translateY(0.4rem);
 }
-main section form option div.op-list {
+main section form option .op-list {
   position: absolute;
   top: calc(100% + 4px);
   left: 0;
@@ -343,9 +351,8 @@ main section form option div.op-list {
   overflow: hidden;
   height: 0;
 }
-main section form option div.op-list ul {
+main section form option .op-list ul {
   height: calc(var(--_height) * var(--_count) + (var(--_padding)));
-  list-style-type: none;
   padding: 0;
   margin: 0;
   display: flex;
@@ -354,7 +361,7 @@ main section form option div.op-list ul {
   border-radius: 0.8rem;
   overflow: hidden;
 }
-main section form option div.op-list ul li {
+main section form option .op-list ul li {
   height: var(--_height);
   width: 100%;
   padding: 0 var(--_padding) 0 calc(var(--_padding) / 2 * 3 + var(--_font-size));
@@ -362,16 +369,16 @@ main section form option div.op-list ul li {
   align-items: center;
   justify-content: space-between;
 }
-main section form option div.op-list ul li:hover, main section form option div.op-list ul li:focus {
+main section form option .op-list ul li:hover, main section form option .op-list ul li:focus-visible {
   background: var(--bg-lite-hh);
 }
-main section form option div.op-list ul li:first-child {
+main section form option .op-list ul li:first-child {
   margin-top: calc(var(--_padding) / 2);
 }
-main section form option div.op-list ul li:last-child {
+main section form option .op-list ul li:last-child {
   margin-bottom: calc(var(--_padding) / 2);
 }
-main section form option div.op-list ul li:not(.active) .fa {
+main section form option .op-list ul li:not(.active) .fa {
   display: none;
 }
 main section form option.expanded .op-list {
