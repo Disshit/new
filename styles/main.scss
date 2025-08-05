@@ -210,6 +210,7 @@ main {
             justify-content: center;
             width: 100%;
             gap: 4.8rem;
+            margin-bottom: 2rem; /* Center the input box */
             .input {
                 --_height: 5.4rem;
                 --_font-size: 2rem;
@@ -414,6 +415,41 @@ main {
                 position: fixed;
                 top: -200svh;
                 left: -200svw;
+            }
+            sup {
+                .link-type {
+                    display: flex;
+                    gap: 2rem;
+                    li {
+                        --li-size: 6rem;
+                        --li-padding: 1rem;
+                        @include sameSize(calc(var(--li-size) + (var(--li-padding) * 2)));
+                        span {
+                            @include sameSize(100%);
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            border-radius: $globalradius;
+                            background: var(--bg-lite);
+                            cursor: pointer;
+                            transition: background $globalduration ease-in-out, transform $globalduration ease-in-out;
+                        }
+                        &:hover, &:focus-visible {
+                            span {
+                                background: var(--bg-lite-h);
+                            }
+                        }
+                        &:active {
+                            span {
+                                transform: scale(.8);
+                            }
+                        }
+                        .fa {
+                            font-size: calc(var(--li-size) - (var(--li-padding) * 2));
+                            line-height: 1;
+                        }
+                    }
+                }
             }
         }
     }

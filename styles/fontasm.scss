@@ -1,4 +1,4 @@
-$version: 20250512015347;
+$version: 20250706021216;
 
 @font-face {
     font-family: 'Fontasm';
@@ -42,5 +42,17 @@ $version: 20250512015347;
     }
     &.fa-shortening::before {
         content: '\E008';
+    }
+    &.fa-link::before {
+        content: '\E009';
+    }
+    &.fa-magnet::before {
+        content: '\E00A';
+    }
+    &.fa-download::before {
+        content: '\E00B';
+    }
+    &.fa-gdrive::before {
+        content: '\E00C';
     }
 }

@@ -194,6 +194,7 @@ main section form {
   justify-content: center;
   width: 100%;
   gap: 4.8rem;
+  margin-bottom: 2rem; /* Center the input box */
 }
 main section form .input {
   --_height: 5.4rem;
@@ -391,4 +392,35 @@ main section form input.disabled {
   position: fixed;
   top: -200svh;
   left: -200svw;
+}
+main section form sup .link-type {
+  display: flex;
+  gap: 2rem;
+}
+main section form sup .link-type li {
+  --li-size: 6rem;
+  --li-padding: 1rem;
+  height: calc(var(--li-size) + var(--li-padding) * 2);
+  width: calc(var(--li-size) + var(--li-padding) * 2);
+}
+main section form sup .link-type li span {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.8rem;
+  background: var(--bg-lite);
+  cursor: pointer;
+  transition: background 0.1s ease-in-out, transform 0.1s ease-in-out;
+}
+main section form sup .link-type li:hover span, main section form sup .link-type li:focus-visible span {
+  background: var(--bg-lite-h);
+}
+main section form sup .link-type li:active span {
+  transform: scale(0.8);
+}
+main section form sup .link-type li .fa {
+  font-size: calc(var(--li-size) - var(--li-padding) * 2);
+  line-height: 1;
 }/*# sourceMappingURL=main.css.map */
