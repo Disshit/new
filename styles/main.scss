@@ -381,7 +381,6 @@ main {
                         overflow: hidden;
                         li {
                             height: var(--_height);
-                            width: 100%;
                             padding: 0 var(--_padding) 0 calc((var(--_padding) / 2 * 3) + var(--_font-size));
                             display: flex;
                             align-items: center;

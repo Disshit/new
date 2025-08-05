@@ -3,7 +3,7 @@
  */
 
 const base64 = {
-    "encode": function (string) {
+    encode: function (string) {
         return btoa(
             encodeURIComponent(string).replace(/%([0-9A-F]{2})/g,
                 function toSolidBytes(match, p1) {
@@ -12,7 +12,7 @@ const base64 = {
             )
         );
     },
-    "decode": function (string) {
+    decode: function (string) {
         return decodeURIComponent(
             atob(string).split('').map(function (c) {
                 return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
