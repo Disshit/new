@@ -24,7 +24,7 @@
 }
 *, *::before, *::after {
   box-sizing: border-box;
-  transition-duration: 0.1s;
+  transition-duration: 0.075s;
   transition-timing-function: ease-in-out;
 }
 
@@ -145,10 +145,10 @@ header .btn-menu circle dot {
   background: var(--text-color);
   transform: scale(0);
 }
-header .btn-menu:hover circle, header .btn-menu:focus-visible circle, header .btn-menu:active circle {
+header .btn-menu:hover circle, header .btn-menu:focus-visible circle, header .btn-menu:active circle, header .btn-menu[class*=keyboard-active] circle {
   animation: unset;
 }
-header .btn-menu:active circle {
+header .btn-menu:active circle, header .btn-menu[class*=keyboard-active] circle {
   transform: scale(0.65);
 }
 
@@ -211,7 +211,6 @@ main section form .input {
   border-radius: 0.8rem;
   border: 1px solid var(--border-color);
   z-index: 0;
-  outline: 1px solid transparent;
 }
 main section form .input label {
   position: absolute;
@@ -245,15 +244,16 @@ main section form .input .btn-clear, main section form .input .btn-clear i, main
   line-height: 1;
 }
 main section form .input .btn-send {
-  position: relative;
-  z-index: 1;
+  position: absolute;
+  z-index: 2;
   cursor: not-allowed;
+  right: 0;
 }
 main section form .input .btn-clear {
   transform: scale(0);
   position: absolute;
   right: calc(var(--_padding) * 2 + var(--_font-size));
-  z-index: 0;
+  z-index: 2;
 }
 main section form .input .btn-clear:hover, main section form .input .btn-clear:focus-visible {
   color: var(--accent-color);
@@ -261,13 +261,9 @@ main section form .input .btn-clear:hover, main section form .input .btn-clear:f
 main section form .input:focus-within {
   background: var(--bg-lite-h);
 }
-main section form .input:has(input[type=text]:focus-visible) {
-  outline: 1px solid var(--accent-color);
-}
 main section form.text .btn-clear {
   transform: scale(1);
   position: relative;
-  right: unset;
   z-index: 1;
 }
 main section form.text .btn-send {
@@ -283,7 +279,7 @@ main section form.text .btn-send:hover i, main section form.text .btn-send:focus
 main section form.text .btn-clear, main section form.text .btn-send {
   cursor: pointer;
 }
-main section form.text .btn-clear:active i, main section form.text .btn-send:active i {
+main section form.text .btn-clear:active i, main section form.text .btn-clear[class*=keyboard-active] i, main section form.text .btn-send:active i, main section form.text .btn-send[class*=keyboard-active] i {
   transform: scale(0.65);
 }
 main section form.text label {
@@ -329,6 +325,7 @@ main section form option .op-button div {
   padding: 0 var(--_padding);
   background: var(--bg-lite);
   border-radius: 0.8rem;
+  border: 1px solid transparent;
 }
 main section form option .op-button div span:not(.value)::after {
   content: ":";
@@ -341,7 +338,10 @@ main section form option .op-button div span.value {
 main section form option .op-button:hover div, main section form option .op-button:focus-visible div {
   background: var(--bg-lite-h);
 }
-main section form option .op-button:active div {
+main section form option .op-button:focus-visible div {
+  border: 1px solid var(--border-color);
+}
+main section form option .op-button:active div, main section form option .op-button[class*=keyboard-active] div {
   transform: translateY(0.4rem);
 }
 main section form option .op-list {
@@ -395,13 +395,17 @@ main section form input.disabled {
 }
 main section form sup .link-type {
   display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 2rem;
+  transition: gap 0.1s ease-in-out;
 }
 main section form sup .link-type li {
   --li-size: 6rem;
   --li-padding: 1rem;
   height: calc(var(--li-size) + var(--li-padding) * 2);
   width: calc(var(--li-size) + var(--li-padding) * 2);
+  transition: transform 0.1s ease-in-out, margin 0.1s ease-in-out;
 }
 main section form sup .link-type li span {
   height: 100%;
@@ -412,15 +416,35 @@ main section form sup .link-type li span {
   border-radius: 0.8rem;
   background: var(--bg-lite);
   cursor: pointer;
-  transition: background 0.1s ease-in-out, transform 0.1s ease-in-out;
+  border: 1px solid transparent;
+  transition: background 0.075s ease-in-out, transform 0.1s ease-in-out;
 }
 main section form sup .link-type li:hover span, main section form sup .link-type li:focus-visible span {
   background: var(--bg-lite-h);
 }
-main section form sup .link-type li:active span {
+main section form sup .link-type li:focus-visible span {
+  border: 1px solid var(--border-color);
+}
+main section form sup .link-type li:active span, main section form sup .link-type li[class*=keyboard-active] span {
   transform: scale(0.8);
 }
 main section form sup .link-type li .fa {
   font-size: calc(var(--li-size) - var(--li-padding) * 2);
   line-height: 1;
+}
+main section form sup .link-type li.active span {
+  color: var(--accent-color);
+}
+main section form sup .link-type:has(li.active) {
+  gap: 0.4rem;
+}
+main section form sup .link-type:has(li.active) li:not(.active) {
+  transform: scale(0.8);
+}
+main section form sup .link-type:has(li.active) li.active {
+  transform: scale(1.2);
+  margin: 0 1.6rem;
+}
+main section form sup .link-type.sliding li:active span {
+  transform: unset;
 }/*# sourceMappingURL=main.css.map */

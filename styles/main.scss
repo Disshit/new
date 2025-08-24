@@ -5,6 +5,7 @@ $xl: 1280px;
 $xxl: 1536px;
 
 $globalduration: .1s;
+$hoverduration: .075s;
 $globalradius: .8rem;
 
 @mixin sameSize($size) {
@@ -45,7 +46,7 @@ $globalradius: .8rem;
     }
     &, &::before, &::after {
         box-sizing: border-box;
-        transition-duration: $globalduration;
+        transition-duration: $hoverduration;
         transition-timing-function: ease-in-out;
     }
 }
@@ -153,12 +154,12 @@ header {
                 transform: scale(0);
             }
         }
-        &:hover, &:focus-visible, &:active {
+        &:hover, &:focus-visible, &:active, &[class*="keyboard-active"] {
             circle {
                 animation: unset;
             }
         }
-        &:active {
+        &:active, &[class*="keyboard-active"] {
             circle {
                 transform: scale(.65);
             }
@@ -258,32 +259,28 @@ main {
                     }
                 }
                 .btn-send {
-                    position: relative;
-                    z-index: 1;
+                    position: absolute;
+                    z-index: 2;
                     cursor: not-allowed;
+                    right: 0;
                 }
                 .btn-clear {
                     transform: scale(0);
                     position: absolute;
                     right: calc(var(--_padding) * 2 + var(--_font-size));
-                    z-index: 0;
+                    z-index: 2;
                     &:hover, &:focus-visible {
                         color: var(--accent-color);
                     }
                 }
-                outline: 1px solid transparent;
                 &:focus-within {
                     background: var(--bg-lite-h);
-                }
-                &:has(input[type="text"]:focus-visible) {
-                    outline: 1px solid var(--accent-color);
                 }
             }
             &.text {
                 .btn-clear {
                     transform: scale(1);
                     position: relative;
-                    right: unset;
                     z-index: 1;
                 }
                 .btn-send {
@@ -298,7 +295,7 @@ main {
                 }
                 .btn-clear, .btn-send {
                     cursor: pointer;
-                    &:active i {
+                    &:active i, &[class*="keyboard-active"] i {
                         transform: scale(.65);
                     }
                 }
@@ -340,6 +337,7 @@ main {
                         padding: 0 var(--_padding);
                         background: var(--bg-lite);
                         border-radius: $globalradius;
+                        border: 1px solid transparent;
                         span {
                             &:not(.value) {
                                 &::after {
@@ -358,7 +356,12 @@ main {
                             background: var(--bg-lite-h);
                         }
                     }
-                    &:active {
+                    &:focus-visible {
+                        div {
+                            border: 1px solid var(--border-color);
+                        }
+                    }
+                    &:active, &[class*="keyboard-active"] {
                         div {
                             transform: translateY(.4rem);
                         }
@@ -419,11 +422,15 @@ main {
             sup {
                 .link-type {
                     display: flex;
+                    align-items: center;
+                    justify-content: center;
                     gap: 2rem;
+                    transition: gap $globalduration ease-in-out;
                     li {
                         --li-size: 6rem;
                         --li-padding: 1rem;
                         @include sameSize(calc(var(--li-size) + (var(--li-padding) * 2)));
+                        transition: transform $globalduration ease-in-out, margin $globalduration ease-in-out;
                         span {
                             @include sameSize(100%);
                             display: flex;
@@ -432,14 +439,20 @@ main {
                             border-radius: $globalradius;
                             background: var(--bg-lite);
                             cursor: pointer;
-                            transition: background $globalduration ease-in-out, transform $globalduration ease-in-out;
+                            border: 1px solid transparent;
+                            transition: background $hoverduration ease-in-out, transform $globalduration ease-in-out;
                         }
                         &:hover, &:focus-visible {
                             span {
                                 background: var(--bg-lite-h);
                             }
                         }
-                        &:active {
+                        &:focus-visible {
+                            span {
+                                border: 1px solid var(--border-color);
+                            }
+                        }
+                        &:active, &[class*="keyboard-active"] {
                             span {
                                 transform: scale(.8);
                             }
@@ -447,6 +460,28 @@ main {
                         .fa {
                             font-size: calc(var(--li-size) - (var(--li-padding) * 2));
                             line-height: 1;
+                        }
+                        &.active {
+                            span {
+                                color: var(--accent-color);
+                            }
+                        }
+                    }
+                    &:has(li.active) {
+                        gap: .4rem;
+                        li:not(.active) {
+                            transform: scale(.8);
+                        }
+                        li.active {
+                            transform: scale(1.2);
+                            margin: 0 1.6rem;
+                        }
+                    }
+                    &.sliding {
+                        li:active {
+                            span {
+                                transform: unset;
+                            }
                         }
                     }
                 }

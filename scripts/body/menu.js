@@ -44,33 +44,72 @@ function closeOption(e) {
     }
 }
 
+// Activate Link Type
+function linkType(eT) {
+    if (!eT.closest('.link-type') && !eT.closest('li')) {return;}
+
+    if (document.querySelector('sup .link-type .active')) {
+        let lActive = document.querySelector('sup .link-type .active');
+        if (lActive !== eT.closest('li')) {
+            eT.closest('li').classList.add('active');
+            lActive.classList.remove('active');
+        }
+    } else {
+        eT.closest('li').classList.add('active');
+    }
+}
+
 // Global listener for menu-like events
 document.addEventListener('click', (e) => {
     // Open and close main menu
-    toggleMenu(e);
+    try {toggleMenu(e);} catch {}
 
     // Toggle drop down menus
-    toggleOption(e);
+    try {toggleOption(e);} catch {}
 
     // Update drop down menu selection and close them
-    updateOption(e);
+    try {updateOption(e);} catch {}
 
     // Close if clicks are outside the option element
-    closeOption(e);
+    try {closeOption(e);} catch {}
+
+    // Trigger link type
+    try {linkType(e.target);} catch {}
 });
 
+// Sliding across on touch devices
+document.addEventListener('touchstart', (e) => {
+    try {document.querySelector('sup .link-type').classList.add('sliding');} catch {}
+});
+document.addEventListener('touchend', (e) => {
+    try {document.querySelector('sup .link-type').classList.remove('sliding');} catch {}
+});
+document.querySelector('sup .link-type').addEventListener('touchmove', (e) => {
+    const eUF = document.elementFromPoint(
+        e.touches[0].clientX,
+        e.touches[0].clientY
+    );
+
+    // Trigger link type
+    try {linkType(eUF);} catch {}
+});
+
+// Recreate Mouse-click effect on Keyboard
 document.addEventListener('keydown', (e) => {
     if (e.key !== 'Enter' && e.key !== ' ') {return;}
+    if (!e.target.classList) {return;}
 
-    // Open and close main menu
-    toggleMenu(e);
-
-    // Toggle drop down menus
-    toggleOption(e);
-
-    // Update drop down menu selection and close them
-    updateOption(e);
-
-    // Close if clicks are outside the option element
-    closeOption(e);
+    e.target.classList.add('keyboard-active');
 });
+document.addEventListener('keyup', (e) => {
+    if (e.key !== 'Enter' && e.key !== ' ') {return;}
+    if (!e.target.classList) {return;}
+
+    e.target.click();
+    e.target.classList.remove('keyboard-active');
+});
+document.addEventListener('blur', (e) => {
+    if (!e.target.classList) {return;}
+    
+    e.target.classList.remove('keyboard-active');
+}, true);

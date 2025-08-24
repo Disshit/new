@@ -23,9 +23,9 @@ for %%f in ("%input%") do (
     )
 )
 
-set "output=%cdir%styles\interface.min.css"
+set "output=%cdir%styles\fontface.min.css"
 if exist "%output%" del "%output%"
-set "input=%cdir%styles\interface\*.min.css"
+set "input=%cdir%styles\fontface\*.min.css"
 
 for %%f in ("%input%") do (
     if exist "%%f" (
