@@ -46,7 +46,7 @@ function closeOption(e) {
 
 // Activate Link Type
 function linkType(eT) {
-    if (!eT.closest('.link-type') && !eT.closest('li')) {return;}
+    if (!eT.closest('.link-type') || !eT.closest('li')) {return;}
 
     if (document.querySelector('sup .link-type .active')) {
         let lActive = document.querySelector('sup .link-type .active');
