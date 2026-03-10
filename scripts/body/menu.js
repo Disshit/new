@@ -8,12 +8,12 @@ function toggleMenu(e) {
 // Toggle drop down menus
 function toggleOption(e) {
     if (e.target.closest('.op-button')) {
-        e.target.closest('option').classList.toggle('expanded');
+        e.target.closest('dropmenu').classList.toggle('expanded');
 
         // Close overlapping menu on smaller displays
         let computedStyle = window.getComputedStyle(document.querySelector('sub'));
         if (computedStyle.getPropertyValue('flex-direction').match('column')) {
-            document.querySelector(`option:not([data-type="${e.target.closest('option').getAttribute('data-type')}"])`).classList.remove('expanded');
+            document.querySelector(`option:not([data-type="${e.target.closest('dropmenu').getAttribute('data-type')}"])`).classList.remove('expanded');
         }
     }
 }
@@ -21,23 +21,23 @@ function toggleOption(e) {
 // Update drop down menu selection and close them
 function updateOption(e) {
     if (e.target.closest('li')) {
-        e.target.closest('option').querySelector('.value').textContent = e.target.closest('li').querySelector('span').textContent;
-        e.target.closest('option').querySelector('input').value = e.target.closest('li').querySelector('span').textContent;
-        localStorage.setItem(e.target.closest('option').getAttribute('data-type'), e.target.closest('li').querySelector('span').textContent);
+        e.target.closest('dropmenu').querySelector('.value').textContent = e.target.closest('li').querySelector('span').textContent;
+        e.target.closest('dropmenu').querySelector('input').value = e.target.closest('li').querySelector('span').textContent;
+        localStorage.setItem(e.target.closest('dropmenu').getAttribute('data-type'), e.target.closest('li').querySelector('span').textContent);
         try {
             e.target.closest('ul').querySelector('li.active').classList.remove('active');
         } catch {}
         e.target.closest('li').classList.add('active');
         setTimeout(() => {
-            e.target.closest('option').classList.remove('expanded');
+            e.target.closest('dropmenu').classList.remove('expanded');
         }, 50);
     }
 }
 
 // Close if clicks are outside the option element
 function closeOption(e) {
-    if (!e.target.closest('option')) {
-        let options = document.querySelectorAll('option');
+    if (!e.target.closest('dropmenu')) {
+        let options = document.querySelectorAll('dropmenu');
         for (let x = 0; x < options.length; x++) {
             options[x].classList.remove('expanded');
         }

@@ -99,19 +99,19 @@
                   <button type="button" class="btn-clear" tabindex="-1">
                      <i class="fa fa-clear"></i>
                   </button>
-                  <button type="submit" class="btn-send" tabindex="-1">
-                     <i class="fa fa-send"></i>
-                  </button>
                </div>
                <sub>
-                  <option data-type="security" style="--_count: 4">
+                  <dropmenu data-type="security" style="--_count: 4">
                      <div tabindex="0" role="button" class="op-button">
                         <div>
                            <i class="fa fa-security"></i>
                            <span>Security</span>
                            <input type="text" name="z" class="disabled" tabindex="-1">
                            <span class="value"></span>
-                           <i class="fa fa-down"></i>
+                           <anicon>
+                              <i class="fa fa-downl"></i>
+                              <i class="fa fa-downr"></i>
+                           </anicon>
                         </div>
                      </div>
                      <div class="op-list">
@@ -134,8 +134,11 @@
                            </li>
                         </ul>
                      </div>
-                  </option>
-                  <option data-type="shortening" style="--_count: 4">
+                  </dropmenu>
+                  <button type="submit" class="btn-send" tabindex="-1">
+                     <i class="fa fa-right"></i>
+                  </button>
+                  <!-- <option data-type="shortening" style="--_count: 4">
                      <div tabindex="0" role="button" class="op-button">
                         <div>
                            <i class="fa fa-shortening"></i>
@@ -165,7 +168,7 @@
                            </li>
                         </ul>
                      </div>
-                  </option>
+                  </option> -->
                </sub>
             </form>
          </section>

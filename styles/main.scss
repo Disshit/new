@@ -67,9 +67,24 @@ button, ul, li {
     all: unset;
 }
 
-header, footer, .options, form label {
+header, footer, .options, form label, dropmenu {
     -webkit-touch-callout: none;
     user-select: none;
+}
+
+anicon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    &, i {
+        line-height: 1 !important;
+    }
+    i:not(:first-of-type) {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
 }
 
 html {
@@ -211,7 +226,7 @@ main {
             justify-content: center;
             width: 100%;
             gap: 4.8rem;
-            margin-bottom: 2rem; /* Center the input box */
+            margin: 12.8rem 0 2rem 0; /* Center the input box */
             .input {
                 --_height: 5.4rem;
                 --_font-size: 2rem;
@@ -246,31 +261,32 @@ main {
                     position: relative;
                     z-index: 1;
                 }
-                .btn-clear, .btn-send {
+                .btn-clear {
                     --_font-size: 1.8rem;
                     height: var(--_height);
+                    width: calc((var(--_padding) * 2) + var(--_font-size));
                     font-size: var(--_font-size);
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    padding: 0 var(--_padding);
-                    &, i {
-                        line-height: 1;
-                    }
-                }
-                .btn-send {
-                    position: absolute;
-                    z-index: 2;
-                    cursor: not-allowed;
-                    right: 0;
-                }
-                .btn-clear {
                     transform: scale(0);
                     position: absolute;
-                    right: calc(var(--_padding) * 2 + var(--_font-size));
+                    right: 0;
                     z-index: 2;
+                    &, i {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        line-height: 1;
+                    }
+                    i {
+                        background: transparent;
+                        height: calc(var(--_height) / 1.5);
+                        width: calc(var(--_height) / 1.5);
+                        border-radius: 100%;
+                    }
                     &:hover, &:focus-visible {
-                        color: var(--accent-color);
+                        // color: var(--accent-color);
+                        i {
+                            background: var(--clear-hover);
+                        }
                     }
                 }
                 &:focus-within {
@@ -282,18 +298,6 @@ main {
                     transform: scale(1);
                     position: relative;
                     z-index: 1;
-                }
-                .btn-send {
-                    background: var(--bg-lite-hh);
-                    &:hover, &:focus-visible {
-                        color: var(--bg-lite-hh);
-                        background: var(--accent-color);
-                        i {
-                            transform: scale(1.1);
-                        }
-                    }
-                }
-                .btn-clear, .btn-send {
                     cursor: pointer;
                     &:active i, &[class*="keyboard-active"] i {
                         transform: scale(.65);
@@ -305,16 +309,17 @@ main {
             }
             sub {
                 display: flex;
+                flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 justify-content: center;
                 width: 100%;
-                gap: 3.2rem;
+                gap: 12.8rem; // gap: 3.2rem;
                 @media screen and (max-width: $sm) {
                     flex-direction: column;
                 }
             }
-            option {
+            dropmenu {
                 --_font-size: 1.5rem;
                 --_height: 4.8rem;
                 --_padding: 2.2rem;
@@ -351,6 +356,19 @@ main {
                             }
                         }
                     }
+                    anicon {
+                        .fa-downl {
+                            transform-origin: 33.62% 50%;
+                            transform: rotate(0deg);
+                        }
+                        .fa-downr {
+                            transform-origin: 66.38% 50%;
+                            transform: rotate(0deg);
+                        }
+                        i {
+                            transition: transform $globalduration linear;
+                        }
+                    }
                     &:hover, &:focus-visible {
                         div {
                             background: var(--bg-lite-h);
@@ -374,6 +392,7 @@ main {
                     width: 100%;
                     overflow: hidden;
                     height: 0;
+                    z-index: 2;
                     ul {
                         height: calc((var(--_height) * var(--_count)) + (var(--_padding)));
                         padding: 0;
@@ -406,8 +425,58 @@ main {
                         }
                     }
                 }
-                &.expanded .op-list {
-                    height: calc((var(--_height) * var(--_count)) + (var(--_padding)));
+                &.expanded {
+                    .op-button {
+                        anicon {
+                            .fa-downl {
+                                transform: rotate(90deg);
+                            }
+                            .fa-downr {
+                                transform: rotate(-90deg);
+                            }
+                        }
+                    }
+                    .op-list {
+                        height: calc((var(--_height) * var(--_count)) + (var(--_padding)));
+                    }
+                }
+            }
+            .btn-send {
+                --_font-size: 3.5rem;
+                --_height: 7rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: var(--_font-size);
+                background: var(--bg-lite);
+                height: var(--_height);
+                width: var(--_height);
+                max-width: 30rem;
+                border-radius: 100%;
+                padding: 0;
+                cursor: not-allowed;
+                &, i {
+                    line-height: 1;
+                }
+                i {
+                    position: relative;
+                    right: -1px;
+                    opacity: .5;
+                }
+                &:hover, &:focus-visible {
+                    background: var(--bg-lite-h);
+                }
+                &:focus-visible {
+                    border: 1px solid var(--border-color);
+                }
+                &:active, &[class*="keyboard-active"] {
+                    transform: translateY(.4rem);
+                }
+            }
+            &.text .btn-send {
+                cursor: pointer;
+                i {
+                    opacity: 1;
                 }
             }
             input.disabled {

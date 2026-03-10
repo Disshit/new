@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Fontasm";
-  src: url("../fonts/fontasm.woff2?20250706021216") format("woff2"), url("../fonts/fontasm.woff?20250706021216") format("woff");
+  src: url("../fonts/fontasm.woff2?20260211021321") format("woff2"), url("../fonts/fontasm.woff?20260211021321") format("woff");
   font-weight: normal;
   font-style: normal;
 }
@@ -27,27 +27,36 @@
 .fa.fa-down::before {
   content: "\e004";
 }
-.fa.fa-tick::before {
+.fa.fa-right::before {
   content: "\e005";
 }
-.fa.fa-github::before {
+.fa.fa-tick::before {
   content: "\e006";
 }
-.fa.fa-security::before {
+.fa.fa-github::before {
   content: "\e007";
 }
-.fa.fa-shortening::before {
+.fa.fa-security::before {
   content: "\e008";
 }
-.fa.fa-link::before {
+.fa.fa-shortening::before {
   content: "\e009";
 }
-.fa.fa-magnet::before {
+.fa.fa-link::before {
   content: "\e00a";
 }
-.fa.fa-download::before {
+.fa.fa-magnet::before {
   content: "\e00b";
 }
-.fa.fa-gdrive::before {
+.fa.fa-download::before {
   content: "\e00c";
+}
+.fa.fa-gdrive::before {
+  content: "\e00d";
+}
+.fa.fa-downl::before {
+  content: "\e00e";
+}
+.fa.fa-downr::before {
+  content: "\e00f";
 }/*# sourceMappingURL=fontasm.css.map */

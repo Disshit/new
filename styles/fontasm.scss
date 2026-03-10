@@ -1,4 +1,4 @@
-$version: 20250706021216;
+$version: 20260211021321;
 
 @font-face {
     font-family: 'Fontasm';
@@ -31,28 +31,37 @@ $version: 20250706021216;
     &.fa-down::before {
         content: '\E004';
     }
-    &.fa-tick::before {
+    &.fa-right::before {
         content: '\E005';
     }
-    &.fa-github::before {
+    &.fa-tick::before {
         content: '\E006';
     }
-    &.fa-security::before {
+    &.fa-github::before {
         content: '\E007';
     }
-    &.fa-shortening::before {
+    &.fa-security::before {
         content: '\E008';
     }
-    &.fa-link::before {
+    &.fa-shortening::before {
         content: '\E009';
     }
-    &.fa-magnet::before {
+    &.fa-link::before {
         content: '\E00A';
     }
-    &.fa-download::before {
+    &.fa-magnet::before {
         content: '\E00B';
     }
-    &.fa-gdrive::before {
+    &.fa-download::before {
         content: '\E00C';
+    }
+    &.fa-gdrive::before {
+        content: '\E00D';
+    }
+    &.fa-downl::before {
+        content: '\E00E';
+    }
+    &.fa-downr::before {
+        content: '\E00F';
     }
 }
