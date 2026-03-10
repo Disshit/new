@@ -55,9 +55,9 @@ header, footer, .options, form label {
 }
 
 html {
-  --sans: "Radio Canada", sans-serif;
-  --mono: "Courier Prime", monospace;
-  --logo: "Cuprum", sans-serif;
+  --sans: 'Radio Canada', sans-serif;
+  --mono: 'Courier Prime', monospace;
+  --logo: 'Cuprum', sans-serif;
   font-size: 10px;
 }
 @media screen and (max-width: 768px) {
