@@ -1,29 +1,38 @@
 // Read from localstorage and update default choices
-function setActiveOptions() {
-    let securityChoice = localStorage.security || 'Base64';
-        // shorteningChoice = localStorage.shortening || 'is.gd';
+function defaultLinkType() {
+    const typeChoice = getUrlVars(window.location.href).a || localStorage.linktype || 'link',
+          type = document.querySelector(`.link-type li[data-label="${typeChoice}"]`),
+          typeInput = document.querySelector('.link-type input');
 
-    let security = document.querySelector('dropmenu[data-type="security"]'),
-        securityInput = security.querySelector('input');
-        // shortening = document.querySelector('option[data-type="shortening"]'),
-        // shorteningInput = shortening.querySelector('input');
-
-    security.querySelector('.value').textContent = securityChoice;
-    securityInput.value = securityChoice;
-    // shortening.querySelector('.value').textContent = shorteningChoice;
-    // shorteningInput.value = shorteningChoice;
-
-    for (let x = 0; x < security.querySelectorAll('.op-list li').length; x++) {
-        if (security.querySelectorAll('.op-list li')[x].textContent.match(securityChoice)) {
-            security.querySelectorAll('.op-list li')[x].classList.add('active');
-        }
-    }
-
-    // for (let x = 0; x < shortening.querySelectorAll('.op-list li').length; x++) {
-    //     if (shortening.querySelectorAll('.op-list li')[x].textContent.match(shorteningChoice)) {
-    //         shortening.querySelectorAll('.op-list li')[x].classList.add('active');
-    //     }
-    // }
+    type.classList.add('active');
+    typeInput.value = typeChoice;
 }
 
-setActiveOptions();
+function defaultSecurity() {
+    const securityChoice = localStorage.security || 'base64',
+          security = document.querySelector('dropmenu[data-type="security"]'),
+          securityInput = security.querySelector('input'),
+          securityOption = security.querySelector(`li[data-option="${securityChoice}"]`);
+
+    security.querySelector('.value').textContent = securityOption.textContent;
+    securityInput.value = securityChoice;
+    securityOption.classList.add('active');
+}
+
+function defaultShortening() {
+    const shorteningChoice = localStorage.shortening || 'is.gd',
+          shortening = document.querySelector('dropmenu[data-type="shortening"]'),
+          shorteningInput = shortening.querySelector('input'),
+          shorteningOption = shortening.querySelector(`li[data-option="${shorteningChoice}"]`);
+
+    shortening.querySelector('.value').textContent = shorteningOption.textContent;
+    shorteningInput.value = shorteningChoice;
+    shorteningOption.classList.add('active');
+}
+
+function setDefaults() {
+    try {defaultLinkType()} catch {}
+    try {defaultSecurity()} catch {}
+    try {defaultShortening()} catch {}
+}
+setDefaults();

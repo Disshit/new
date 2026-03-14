@@ -1,6 +1,6 @@
 // declare when input field is or isn't empty
 function inputCheck() {
-    let intext = document.querySelector('form input[name="v"]');
+    let intext = document.querySelector('form #inlink');
     if (intext.value !== '') {
         intext.closest('form').classList.add('text');
         intext.closest('form').querySelector('.btn-clear').removeAttribute('tabindex');
@@ -13,12 +13,14 @@ function inputCheck() {
 }
 
 // listen for input and keydown events
-document.querySelector('form input[name="v"]').addEventListener('input', inputCheck);
-document.querySelector('form input[name="v"]').addEventListener('keydown', inputCheck);
+if (window.dataPage === 'home') {
+    document.querySelector('form #inlink').addEventListener('input', inputCheck);
+    document.querySelector('form #inlink').addEventListener('keydown', inputCheck);
+}
 
 // clear input fields upon load/refresh
 function clearInput() {
-    let intext = document.querySelector('form input[name="v"]');
+    let intext = document.querySelector('form #inlink');
     intext.value = '';
 }
 clearInput();

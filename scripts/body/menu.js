@@ -21,9 +21,10 @@ function toggleOption(e) {
 // Update drop down menu selection and close them
 function updateOption(e) {
     if (e.target.closest('li')) {
+        const menuvalue = e.target.closest('li').getAttribute('data-option');
         e.target.closest('dropmenu').querySelector('.value').textContent = e.target.closest('li').querySelector('span').textContent;
-        e.target.closest('dropmenu').querySelector('input').value = e.target.closest('li').querySelector('span').textContent;
-        localStorage.setItem(e.target.closest('dropmenu').getAttribute('data-type'), e.target.closest('li').querySelector('span').textContent);
+        e.target.closest('dropmenu').querySelector('input:not(.random)').value = menuvalue;
+        localStorage.setItem(e.target.closest('dropmenu').getAttribute('data-type'), menuvalue);
         try {
             e.target.closest('ul').querySelector('li.active').classList.remove('active');
         } catch {}
@@ -32,6 +33,7 @@ function updateOption(e) {
             e.target.closest('dropmenu').classList.remove('expanded');
         }, 50);
     }
+    setSecurityValue();
 }
 
 // Close if clicks are outside the option element
@@ -51,12 +53,13 @@ function linkType(eT) {
     if (document.querySelector('sup .link-type .active')) {
         let lActive = document.querySelector('sup .link-type .active');
         if (lActive !== eT.closest('li')) {
-            eT.closest('li').classList.add('active');
             lActive.classList.remove('active');
         }
-    } else {
-        eT.closest('li').classList.add('active');
     }
+    eT.closest('li').classList.add('active');
+    let lT = eT.closest('li').getAttribute('data-label');
+    localStorage.linktype = lT;
+    eT.closest('.link-type').querySelector('input').value = lT;
 }
 
 // Global listener for menu-like events

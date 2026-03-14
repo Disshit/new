@@ -227,6 +227,15 @@ main {
             width: 100%;
             gap: 4.8rem;
             margin: 12.8rem 0 2rem 0; /* Center the input box */
+            @mixin clearbutton() {
+                transform: scale(1);
+                position: relative;
+                z-index: 1;
+                cursor: pointer;
+                &:active i, &[class*="keyboard-active"] i {
+                    transform: scale(.65);
+                }
+            }
             .input {
                 --_height: 5.4rem;
                 --_font-size: 2rem;
@@ -261,7 +270,7 @@ main {
                     position: relative;
                     z-index: 1;
                 }
-                .btn-clear {
+                .btn-clear, .btn-newtab {
                     --_font-size: 1.8rem;
                     height: var(--_height);
                     width: calc((var(--_padding) * 2) + var(--_font-size));
@@ -289,19 +298,16 @@ main {
                         }
                     }
                 }
+                .btn-newtab {
+                    @include clearbutton();
+                }
                 &:focus-within {
                     background: var(--bg-lite-h);
                 }
             }
             &.text {
                 .btn-clear {
-                    transform: scale(1);
-                    position: relative;
-                    z-index: 1;
-                    cursor: pointer;
-                    &:active i, &[class*="keyboard-active"] i {
-                        transform: scale(.65);
-                    }
+                    @include clearbutton();
                 }
                 label {
                     display: none;
@@ -318,6 +324,13 @@ main {
                 @media screen and (max-width: $sm) {
                     flex-direction: column;
                 }
+            }
+            subdrop {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                gap: 1.6rem;
             }
             dropmenu {
                 --_font-size: 1.5rem;
@@ -441,7 +454,7 @@ main {
                     }
                 }
             }
-            .btn-send {
+            .btn-send, .btn-shorten, .btn-copy {
                 --_font-size: 3.5rem;
                 --_height: 7rem;
                 display: flex;
@@ -469,11 +482,22 @@ main {
                 &:focus-visible {
                     border: 1px solid var(--border-color);
                 }
+            }
+            .btn-send, .btn-copy {
+                transition: transform $globalduration ease-in-out;
+                &:active, &[class*="keyboard-active"] {
+                    transform: scale(.75);
+                }
+            }
+            .btn-shorten {
+                --_height: 4.8rem;
+                --_font-size: 1.5rem;
+                border-radius: $globalradius;
                 &:active, &[class*="keyboard-active"] {
                     transform: translateY(.4rem);
                 }
             }
-            &.text .btn-send {
+            &.text .btn-send, .btn-shorten, .btn-copy {
                 cursor: pointer;
                 i {
                     opacity: 1;
@@ -521,19 +545,19 @@ main {
                                 border: 1px solid var(--border-color);
                             }
                         }
-                        &:active, &[class*="keyboard-active"] {
+                        &:not(.active):active, &[class*="keyboard-active"] {
                             span {
                                 transform: scale(.8);
                             }
-                        }
-                        .fa {
-                            font-size: calc(var(--li-size) - (var(--li-padding) * 2));
-                            line-height: 1;
                         }
                         &.active {
                             span {
                                 color: var(--accent-color);
                             }
+                        }
+                        .fa {
+                            font-size: calc(var(--li-size) - (var(--li-padding) * 2));
+                            line-height: 1;
                         }
                     }
                     &:has(li.active) {
@@ -555,6 +579,23 @@ main {
                     }
                 }
             }
+        }
+    }
+}
+
+html {
+    &[data-page="home"] {
+        subdrop, .btn-copy, .btn-newtab {
+            display: none !important;
+        }
+    }
+    &[data-page="shorten"] {
+        .link-type li:not(.active),
+        dropmenu[data-type="security"],
+        form .input label,
+        .btn-send,
+        .btn-clear {
+            display: none !important;
         }
     }
 }

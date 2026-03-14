@@ -246,7 +246,7 @@ main section form .input input[type=text] {
   position: relative;
   z-index: 1;
 }
-main section form .input .btn-clear {
+main section form .input .btn-clear, main section form .input .btn-newtab {
   --_font-size: 1.8rem;
   height: var(--_height);
   width: calc(var(--_padding) * 2 + var(--_font-size));
@@ -256,20 +256,29 @@ main section form .input .btn-clear {
   right: 0;
   z-index: 2;
 }
-main section form .input .btn-clear, main section form .input .btn-clear i {
+main section form .input .btn-clear, main section form .input .btn-clear i, main section form .input .btn-newtab, main section form .input .btn-newtab i {
   display: flex;
   align-items: center;
   justify-content: center;
   line-height: 1;
 }
-main section form .input .btn-clear i {
+main section form .input .btn-clear i, main section form .input .btn-newtab i {
   background: transparent;
   height: calc(var(--_height) / 1.5);
   width: calc(var(--_height) / 1.5);
   border-radius: 100%;
 }
-main section form .input .btn-clear:hover i, main section form .input .btn-clear:focus-visible i {
+main section form .input .btn-clear:hover i, main section form .input .btn-clear:focus-visible i, main section form .input .btn-newtab:hover i, main section form .input .btn-newtab:focus-visible i {
   background: var(--clear-hover);
+}
+main section form .input .btn-newtab {
+  transform: scale(1);
+  position: relative;
+  z-index: 1;
+  cursor: pointer;
+}
+main section form .input .btn-newtab:active i, main section form .input .btn-newtab[class*=keyboard-active] i {
+  transform: scale(0.65);
 }
 main section form .input:focus-within {
   background: var(--bg-lite-h);
@@ -299,6 +308,13 @@ main section form sub {
   main section form sub {
     flex-direction: column;
   }
+}
+main section form subdrop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 1.6rem;
 }
 main section form dropmenu {
   --_font-size: 1.5rem;
@@ -404,7 +420,7 @@ main section form dropmenu.expanded .op-button anicon .fa-downr {
 main section form dropmenu.expanded .op-list {
   height: calc(var(--_height) * var(--_count) + (var(--_padding)));
 }
-main section form .btn-send {
+main section form .btn-send, main section form .btn-shorten, main section form .btn-copy {
   --_font-size: 3.5rem;
   --_height: 7rem;
   display: flex;
@@ -419,27 +435,38 @@ main section form .btn-send {
   padding: 0;
   cursor: not-allowed;
 }
-main section form .btn-send, main section form .btn-send i {
+main section form .btn-send, main section form .btn-send i, main section form .btn-shorten, main section form .btn-shorten i, main section form .btn-copy, main section form .btn-copy i {
   line-height: 1;
 }
-main section form .btn-send i {
+main section form .btn-send i, main section form .btn-shorten i, main section form .btn-copy i {
   position: relative;
   right: -1px;
   opacity: 0.5;
 }
-main section form .btn-send:hover, main section form .btn-send:focus-visible {
+main section form .btn-send:hover, main section form .btn-send:focus-visible, main section form .btn-shorten:hover, main section form .btn-shorten:focus-visible, main section form .btn-copy:hover, main section form .btn-copy:focus-visible {
   background: var(--bg-lite-h);
 }
-main section form .btn-send:focus-visible {
+main section form .btn-send:focus-visible, main section form .btn-shorten:focus-visible, main section form .btn-copy:focus-visible {
   border: 1px solid var(--border-color);
 }
-main section form .btn-send:active, main section form .btn-send[class*=keyboard-active] {
+main section form .btn-send, main section form .btn-copy {
+  transition: transform 0.1s ease-in-out;
+}
+main section form .btn-send:active, main section form .btn-send[class*=keyboard-active], main section form .btn-copy:active, main section form .btn-copy[class*=keyboard-active] {
+  transform: scale(0.75);
+}
+main section form .btn-shorten {
+  --_height: 4.8rem;
+  --_font-size: 1.5rem;
+  border-radius: 0.8rem;
+}
+main section form .btn-shorten:active, main section form .btn-shorten[class*=keyboard-active] {
   transform: translateY(0.4rem);
 }
-main section form.text .btn-send {
+main section form.text .btn-send, main section form .btn-shorten, main section form .btn-copy {
   cursor: pointer;
 }
-main section form.text .btn-send i {
+main section form.text .btn-send i, main section form .btn-shorten i, main section form .btn-copy i {
   opacity: 1;
 }
 main section form input.disabled {
@@ -483,15 +510,15 @@ main section form sup .link-type li:hover span, main section form sup .link-type
 main section form sup .link-type li:focus-visible span {
   border: 1px solid var(--border-color);
 }
-main section form sup .link-type li:active span, main section form sup .link-type li[class*=keyboard-active] span {
+main section form sup .link-type li:not(.active):active span, main section form sup .link-type li[class*=keyboard-active] span {
   transform: scale(0.8);
+}
+main section form sup .link-type li.active span {
+  color: var(--accent-color);
 }
 main section form sup .link-type li .fa {
   font-size: calc(var(--li-size) - var(--li-padding) * 2);
   line-height: 1;
-}
-main section form sup .link-type li.active span {
-  color: var(--accent-color);
 }
 main section form sup .link-type:has(li.active) {
   gap: 0.4rem;
@@ -505,4 +532,15 @@ main section form sup .link-type:has(li.active) li.active {
 }
 main section form sup .link-type.sliding li:active span {
   transform: unset;
+}
+
+html[data-page=home] subdrop, html[data-page=home] .btn-copy, html[data-page=home] .btn-newtab {
+  display: none !important;
+}
+html[data-page=shorten] .link-type li:not(.active),
+html[data-page=shorten] dropmenu[data-type=security],
+html[data-page=shorten] form .input label,
+html[data-page=shorten] .btn-send,
+html[data-page=shorten] .btn-clear {
+  display: none !important;
 }/*# sourceMappingURL=main.css.map */

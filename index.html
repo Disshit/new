@@ -46,6 +46,7 @@
 
    <!-- <script type="text/javascript" src="lib/pako_deflate.min.js"></script> -->
    <script type="text/javascript" src="lib/pako_inflate.min.js"></script>
+   <script type="text/javascript" src="lib/scrypto.min.js"></script>
    <!-- <script type="text/javascript" src="scripts/head/base64.min.js"></script>
    <script type="text/javascript" src="scripts/head/cypher.min.js"></script>
    <script type="text/javascript" src="scripts/head/lzw.min.js"></script> -->
@@ -70,43 +71,48 @@
             <form action="/">
                <sup>
                   <ul class="link-type">
-                     <li class="active" tabindex="0">
+                     <li data-label="link" tabindex="0">
                         <span>
                            <i class="fa fa-link"></i>
                         </span>
                      </li>
-                     <li tabindex="0">
+                     <li data-label="magnet" tabindex="0">
                         <span>
                            <i class="fa fa-magnet"></i>
                         </span>
                      </li>
-                     <li tabindex="0">
+                     <li data-label="gdrive" tabindex="0">
                         <span>
                            <i class="fa fa-gdrive"></i>
                         </span>
                      </li>
-                     <li tabindex="0">
+                     <li data-label="download" tabindex="0">
                         <span>
                            <i class="fa fa-download"></i>
                         </span>
                      </li>
                      <!-- <li>More...</li> -->
+                     <input type="text" name="a" class="disabled" tabindex="-1">
                   </ul>
                </sup>
                <div class="input">
                   <label>insert disshit</label>
-                  <input type="text" name="v" id="inlink" required="">
+                  <input type="text" name="b" id="inlink" required="">
                   <button type="button" class="btn-clear" tabindex="-1">
                      <i class="fa fa-clear"></i>
                   </button>
+                  <a type="button" class="btn-newtab" tabindex="0">
+                     <i class="fa fa-newtab"></i>
+                  </a>
                </div>
                <sub>
-                  <dropmenu data-type="security" style="--_count: 4">
+                  <dropmenu data-type="security" style="--_count: 5">
                      <div tabindex="0" role="button" class="op-button">
                         <div>
                            <i class="fa fa-security"></i>
-                           <span>Security</span>
-                           <input type="text" name="z" class="disabled" tabindex="-1">
+                           <span>Encoding</span>
+                           <input type="text" name="c" class="disabled" tabindex="-1">
+                           <input type="text" name="d" class="disabled random" tabindex="-1">
                            <span class="value"></span>
                            <anicon>
                               <i class="fa fa-downl"></i>
@@ -116,59 +122,70 @@
                      </div>
                      <div class="op-list">
                         <ul>
-                           <li>
+                           <li data-option="none">
                               <span>None</span>
                               <i class="fa fa-tick"></i>
                            </li>
-                           <li>
+                           <li data-option="base64">
                               <span>Base64</span>
                               <i class="fa fa-tick"></i>
                            </li>
-                           <li>
+                           <li data-option="cypher">
                               <span>Cypher</span>
                               <i class="fa fa-tick"></i>
                            </li>
-                           <li>
+                           <li data-option="pako">
                               <span>Pako</span>
+                              <i class="fa fa-tick"></i>
+                           </li>
+                           <li data-option="scrypto">
+                              <span>SimpleCrypto</span>
                               <i class="fa fa-tick"></i>
                            </li>
                         </ul>
                      </div>
                   </dropmenu>
+                  <subdrop>
+                     <dropmenu data-type="shortening" style="--_count: 3">
+                        <div tabindex="0" role="button" class="op-button">
+                           <div>
+                              <i class="fa fa-shortening"></i>
+                              <span>Shortening</span>
+                              <input type="text" class="disabled" tabindex="-1">
+                              <span class="value"></span>
+                              <anicon>
+                                 <i class="fa fa-downl"></i>
+                                 <i class="fa fa-downr"></i>
+                              </anicon>
+                           </div>
+                        </div>
+                        <div class="op-list">
+                           <ul>
+                              <li data-option="is.gd">
+                                 <span>is.gd</span>
+                                 <i class="fa fa-tick"></i>
+                              </li>
+                              <li data-option="v.gd">
+                                 <span>v.gd</span>
+                                 <i class="fa fa-tick"></i>
+                              </li>
+                              <li data-option="ulvis.net">
+                                 <span>ulvis.net</span>
+                                 <i class="fa fa-tick"></i>
+                              </li>
+                           </ul>
+                        </div>
+                     </dropmenu>
+                     <button type="button" class="btn-shorten" tabindex="0">
+                        <i class="fa fa-right"></i>
+                     </button>
+                  </subdrop>
                   <button type="submit" class="btn-send" tabindex="-1">
                      <i class="fa fa-right"></i>
                   </button>
-                  <!-- <option data-type="shortening" style="--_count: 4">
-                     <div tabindex="0" role="button" class="op-button">
-                        <div>
-                           <i class="fa fa-shortening"></i>
-                           <span>Shortening</span>
-                           <input type="text" name="x" class="disabled" tabindex="-1">
-                           <span class="value"></span>
-                           <i class="fa fa-down"></i>
-                        </div>
-                     </div>
-                     <div class="op-list">
-                        <ul>
-                           <li>
-                              <span>None</span>
-                              <i class="fa fa-tick"></i>
-                           </li>
-                           <li>
-                              <span>is.gd</span>
-                              <i class="fa fa-tick"></i>
-                           </li>
-                           <li>
-                              <span>v.gd</span>
-                              <i class="fa fa-tick"></i>
-                           </li>
-                           <li>
-                              <span>ulvis.net</span>
-                              <i class="fa fa-tick"></i>
-                           </li>
-                        </ul>
-                     </div>
-                  </option> -->
+                  <button type="button" class="btn-copy" tabindex="0">
+                     <i class="fa fa-right"></i>
+                  </button>
                </sub>
             </form>
          </section>

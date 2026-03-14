@@ -1,4 +1,4 @@
-$version: 20260211021321;
+$version: 20260214165431;
 
 @font-face {
     font-family: 'Fontasm';
@@ -22,19 +22,19 @@ $version: 20260211021321;
     &.fa-dissite::before {
         content: '\E001';
     }
-    &.fa-send::before {
+    &.fa-clear::before {
         content: '\E002';
     }
-    &.fa-clear::before {
+    &.fa-down::before {
         content: '\E003';
     }
-    &.fa-down::before {
+    &.fa-right::before {
         content: '\E004';
     }
-    &.fa-right::before {
+    &.fa-tick::before {
         content: '\E005';
     }
-    &.fa-tick::before {
+    &.fa-newtab::before {
         content: '\E006';
     }
     &.fa-github::before {

@@ -74,5 +74,18 @@ const security = {
             let inflated = pako.inflate(String(string).split(','));
             return new TextDecoder().decode(inflated);
         }
+    },
+    /* Utilize simple crypto and return strings
+     * It's the security you deserve, not the one you need
+     */
+    scrypto: {
+        encode: function (key, string) {
+            const sc = new SimpleCrypto(key);
+            return sc.encrypt(string);
+        },
+        decode: function (key, estring) {
+            const sc = new SimpleCrypto(key);
+            return sc.decrypt(estring);
+        }
     }
 };

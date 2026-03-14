@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Fontasm";
-  src: url("../fonts/fontasm.woff2?20260211021321") format("woff2"), url("../fonts/fontasm.woff?20260211021321") format("woff");
+  src: url("../fonts/fontasm.woff2?20260214165431") format("woff2"), url("../fonts/fontasm.woff?20260214165431") format("woff");
   font-weight: normal;
   font-style: normal;
 }
@@ -18,19 +18,19 @@
 .fa.fa-dissite::before {
   content: "\e001";
 }
-.fa.fa-send::before {
+.fa.fa-clear::before {
   content: "\e002";
 }
-.fa.fa-clear::before {
+.fa.fa-down::before {
   content: "\e003";
 }
-.fa.fa-down::before {
+.fa.fa-right::before {
   content: "\e004";
 }
-.fa.fa-right::before {
+.fa.fa-tick::before {
   content: "\e005";
 }
-.fa.fa-tick::before {
+.fa.fa-newtab::before {
   content: "\e006";
 }
 .fa.fa-github::before {
