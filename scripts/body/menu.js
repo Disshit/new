@@ -33,7 +33,7 @@ function updateOption(e) {
             e.target.closest('dropmenu').classList.remove('expanded');
         }, 50);
     }
-    setSecurityValue();
+    setEncodingValue();
 }
 
 // Close if clicks are outside the option element

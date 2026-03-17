@@ -32,3 +32,5 @@ for %%f in ("%input%") do (
         type "%%f" >> "%output%"
     )
 )
+
+timeout 1

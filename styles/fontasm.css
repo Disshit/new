@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Fontasm";
-  src: url("../fonts/fontasm.woff2?20260214165431") format("woff2"), url("../fonts/fontasm.woff?20260214165431") format("woff");
+  src: url("../fonts/fontasm.woff2?20260217221255") format("woff2"), url("../fonts/fontasm.woff?20260217221255") format("woff");
   font-weight: normal;
   font-style: normal;
 }
@@ -36,7 +36,7 @@
 .fa.fa-github::before {
   content: "\e007";
 }
-.fa.fa-security::before {
+.fa.fa-encoding::before {
   content: "\e008";
 }
 .fa.fa-shortening::before {

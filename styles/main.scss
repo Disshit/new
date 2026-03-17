@@ -457,43 +457,46 @@ main {
             .btn-send, .btn-shorten, .btn-copy {
                 --_font-size: 3.5rem;
                 --_height: 7rem;
-                display: flex;
-                align-items: center;
-                justify-content: center;
                 font-size: var(--_font-size);
-                background: var(--bg-lite);
                 height: var(--_height);
                 width: var(--_height);
                 max-width: 30rem;
-                border-radius: 100%;
                 padding: 0;
                 cursor: not-allowed;
                 &, i {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
                     line-height: 1;
+                    border-radius: 100%;
                 }
                 i {
+                    @include sameSize(100%);
                     position: relative;
                     right: -1px;
                     opacity: .5;
+                    background: var(--bg-lite);
                 }
-                &:hover, &:focus-visible {
+                &:hover i, &:focus-visible i {
                     background: var(--bg-lite-h);
                 }
-                &:focus-visible {
+                &:focus-visible i {
                     border: 1px solid var(--border-color);
                 }
             }
             .btn-send, .btn-copy {
                 transition: transform $globalduration ease-in-out;
-                &:active, &[class*="keyboard-active"] {
+                &:active i, &[class*="keyboard-active"] i {
                     transform: scale(.75);
                 }
             }
             .btn-shorten {
                 --_height: 4.8rem;
                 --_font-size: 1.5rem;
-                border-radius: $globalradius;
-                &:active, &[class*="keyboard-active"] {
+                &, i {
+                    border-radius: $globalradius;
+                }
+                &:active i, &[class*="keyboard-active"] i {
                     transform: translateY(.4rem);
                 }
             }
@@ -591,11 +594,21 @@ html {
     }
     &[data-page="shorten"] {
         .link-type li:not(.active),
-        dropmenu[data-type="security"],
+        dropmenu[data-type="encoding"],
         form .input label,
         .btn-send,
         .btn-clear {
             display: none !important;
+        }
+
+        .link-type li.active {
+            span {
+                cursor: default;
+                background: unset;
+                i {
+                    font-size: calc(var(--li-size) - var(--li-padding) * 0);
+                }
+            }
         }
     }
 }

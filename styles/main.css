@@ -423,44 +423,48 @@ main section form dropmenu.expanded .op-list {
 main section form .btn-send, main section form .btn-shorten, main section form .btn-copy {
   --_font-size: 3.5rem;
   --_height: 7rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   font-size: var(--_font-size);
-  background: var(--bg-lite);
   height: var(--_height);
   width: var(--_height);
   max-width: 30rem;
-  border-radius: 100%;
   padding: 0;
   cursor: not-allowed;
 }
 main section form .btn-send, main section form .btn-send i, main section form .btn-shorten, main section form .btn-shorten i, main section form .btn-copy, main section form .btn-copy i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   line-height: 1;
+  border-radius: 100%;
 }
 main section form .btn-send i, main section form .btn-shorten i, main section form .btn-copy i {
+  height: 100%;
+  width: 100%;
   position: relative;
   right: -1px;
   opacity: 0.5;
+  background: var(--bg-lite);
 }
-main section form .btn-send:hover, main section form .btn-send:focus-visible, main section form .btn-shorten:hover, main section form .btn-shorten:focus-visible, main section form .btn-copy:hover, main section form .btn-copy:focus-visible {
+main section form .btn-send:hover i, main section form .btn-send:focus-visible i, main section form .btn-shorten:hover i, main section form .btn-shorten:focus-visible i, main section form .btn-copy:hover i, main section form .btn-copy:focus-visible i {
   background: var(--bg-lite-h);
 }
-main section form .btn-send:focus-visible, main section form .btn-shorten:focus-visible, main section form .btn-copy:focus-visible {
+main section form .btn-send:focus-visible i, main section form .btn-shorten:focus-visible i, main section form .btn-copy:focus-visible i {
   border: 1px solid var(--border-color);
 }
 main section form .btn-send, main section form .btn-copy {
   transition: transform 0.1s ease-in-out;
 }
-main section form .btn-send:active, main section form .btn-send[class*=keyboard-active], main section form .btn-copy:active, main section form .btn-copy[class*=keyboard-active] {
+main section form .btn-send:active i, main section form .btn-send[class*=keyboard-active] i, main section form .btn-copy:active i, main section form .btn-copy[class*=keyboard-active] i {
   transform: scale(0.75);
 }
 main section form .btn-shorten {
   --_height: 4.8rem;
   --_font-size: 1.5rem;
+}
+main section form .btn-shorten, main section form .btn-shorten i {
   border-radius: 0.8rem;
 }
-main section form .btn-shorten:active, main section form .btn-shorten[class*=keyboard-active] {
+main section form .btn-shorten:active i, main section form .btn-shorten[class*=keyboard-active] i {
   transform: translateY(0.4rem);
 }
 main section form.text .btn-send, main section form .btn-shorten, main section form .btn-copy {
@@ -538,9 +542,16 @@ html[data-page=home] subdrop, html[data-page=home] .btn-copy, html[data-page=hom
   display: none !important;
 }
 html[data-page=shorten] .link-type li:not(.active),
-html[data-page=shorten] dropmenu[data-type=security],
+html[data-page=shorten] dropmenu[data-type=encoding],
 html[data-page=shorten] form .input label,
 html[data-page=shorten] .btn-send,
 html[data-page=shorten] .btn-clear {
   display: none !important;
+}
+html[data-page=shorten] .link-type li.active span {
+  cursor: default;
+  background: unset;
+}
+html[data-page=shorten] .link-type li.active span i {
+  font-size: calc(var(--li-size) - var(--li-padding) * 0);
 }/*# sourceMappingURL=main.css.map */

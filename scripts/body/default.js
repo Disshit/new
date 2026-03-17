@@ -8,31 +8,31 @@ function defaultLinkType() {
     typeInput.value = typeChoice;
 }
 
-function defaultSecurity() {
-    const securityChoice = localStorage.security || 'base64',
-          security = document.querySelector('dropmenu[data-type="security"]'),
-          securityInput = security.querySelector('input'),
-          securityOption = security.querySelector(`li[data-option="${securityChoice}"]`);
+function defaultEncoding() {
+    const encodingChoice = localStorage.encoding || 'base64',
+          encodingNode = document.querySelector('dropmenu[data-type="encoding"]'),
+          encodingInput = encodingNode.querySelector('input'),
+          encodingOption = encodingNode.querySelector(`li[data-option="${encodingChoice}"]`);
 
-    security.querySelector('.value').textContent = securityOption.textContent;
-    securityInput.value = securityChoice;
-    securityOption.classList.add('active');
+    encodingNode.querySelector('.value').textContent = encodingOption.textContent;
+    encodingInput.value = encodingChoice;
+    encodingOption.classList.add('active');
 }
 
 function defaultShortening() {
-    const shorteningChoice = localStorage.shortening || 'is.gd',
-          shortening = document.querySelector('dropmenu[data-type="shortening"]'),
-          shorteningInput = shortening.querySelector('input'),
-          shorteningOption = shortening.querySelector(`li[data-option="${shorteningChoice}"]`);
+    const shorteningChoice = localStorage.shortening || 'isgd',
+          shorteningNode = document.querySelector('dropmenu[data-type="shortening"]'),
+          shorteningInput = shorteningNode.querySelector('input'),
+          shorteningOption = shorteningNode.querySelector(`li[data-option="${shorteningChoice}"]`);
 
-    shortening.querySelector('.value').textContent = shorteningOption.textContent;
+    shorteningNode.querySelector('.value').textContent = shorteningOption.textContent;
     shorteningInput.value = shorteningChoice;
     shorteningOption.classList.add('active');
 }
 
 function setDefaults() {
     try {defaultLinkType()} catch {}
-    try {defaultSecurity()} catch {}
+    try {defaultEncoding()} catch {}
     try {defaultShortening()} catch {}
 }
 setDefaults();

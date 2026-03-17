@@ -2,7 +2,7 @@
  * Further actions needed to produce and deduce link
  */
 
-const security = {
+const encoding = {
     /* Basic Base64 conversion for strings
      * https://stackoverflow.com/a/30106551
      */
@@ -38,8 +38,8 @@ const security = {
             let newString = "";
 
             for (let x = 0; x < String(string).length; x++) {
-                if (security.cypher.cases.includes(String(string)[x])) {
-                    newString += security.cypher.goIn(security.cypher.cases, security.cypher.cases.indexOf(String(string)[x]) + displace);
+                if (encoding.cypher.cases.includes(String(string)[x])) {
+                    newString += encoding.cypher.goIn(encoding.cypher.cases, encoding.cypher.cases.indexOf(String(string)[x]) + displace);
                 } else {
                     newString += String(string)[x];
                 }
@@ -51,8 +51,8 @@ const security = {
             let originalString = "";
 
             for (let x = 0; x < String(string).length; x++) {
-                if (security.cypher.cases.includes(String(string)[x])) {
-                    originalString += security.cypher.goIn(security.cypher.cases, security.cypher.cases.indexOf(String(string)[x]) - displace);
+                if (encoding.cypher.cases.includes(String(string)[x])) {
+                    originalString += encoding.cypher.goIn(encoding.cypher.cases, encoding.cypher.cases.indexOf(String(string)[x]) - displace);
                 } else {
                     originalString += String(string)[x];
                 }
@@ -76,7 +76,7 @@ const security = {
         }
     },
     /* Utilize simple crypto and return strings
-     * It's the security you deserve, not the one you need
+     * It's the encoding you deserve, not the one you need
      */
     scrypto: {
         encode: function (key, string) {

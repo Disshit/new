@@ -3,31 +3,37 @@
  */
 
 const shortening = {
+    isgd: async function (link) {
+        const url = 'https://is.gd/create.php?format=json&url=' + encodeURIComponent(link.trim()),
+              response = await fetch(url),
+              data = await response.json();
+
+        // console.log(data.shorturl);
+        return data.shorturl;
+    },
+    vgd: async function (link) {
+        const url = 'https://v.gd/create.php?format=json&url=' + encodeURIComponent(link.trim()),
+              response = await fetch(url),
+              data = await response.json();
+
+        // console.log(data.shorturl);
+        return data.shorturl;
+    },
     spoome: async function (link) {
-        const url = 'https://spoo.me/';
-        const options = {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            // body: new URLSearchParams({url: 'https://example.com/'})
-            body: new URLSearchParams({url: link})
-        };
-
-        try {
-            const response = await fetch(url, options);
-            const data = await response.json();
-            console.log(data);
-        } catch (error) {
-            console.error(error);
-        }
-
-        /*
-            Object { domain: "spoo.me", original_url: "https://example.com/", short_url: "https://spoo.me/PacvQT" }
-            domain: "spoo.me"
-            original_url: "https://example.com/"
-            short_url: "https://spoo.me/PacvQT"
-        */
+        const url = 'https://spoo.me/',
+              options = {
+                  method: 'POST',
+                  headers: {
+                      Accept: 'application/json',
+                      'Content-Type': 'application/x-www-form-urlencoded'
+                  },
+                  // body: new URLSearchParams({url: 'https://example.com/'})
+                  body: new URLSearchParams({url: link.trim()})
+              },
+              response = await fetch(url, options),
+              data = await response.json();
+        
+        // console.log(data.short_url);
+        return data.short_url;
     }
 };
