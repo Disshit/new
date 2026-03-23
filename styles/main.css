@@ -431,7 +431,7 @@ main section form .btn-send, main section form .btn-shorten, main section form .
   padding: 0;
   cursor: not-allowed;
 }
-main section form .btn-send, main section form .btn-send i, main section form .btn-shorten, main section form .btn-shorten i, main section form .btn-copy, main section form .btn-copy i {
+main section form .btn-send, main section form .btn-send > *, main section form .btn-send i, main section form .btn-shorten, main section form .btn-shorten > *, main section form .btn-shorten i, main section form .btn-copy, main section form .btn-copy > *, main section form .btn-copy i {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -439,24 +439,26 @@ main section form .btn-send, main section form .btn-send i, main section form .b
   border-radius: 100%;
 }
 main section form .btn-send i, main section form .btn-shorten i, main section form .btn-copy i {
-  height: 100%;
-  width: 100%;
   position: relative;
   right: -1px;
+}
+main section form .btn-send > *, main section form .btn-shorten > *, main section form .btn-copy > * {
+  height: 100%;
+  width: 100%;
   opacity: 0.5;
   background: var(--bg-lite);
   border: 1px solid transparent;
 }
-main section form .btn-send:hover i, main section form .btn-send:focus-visible i, main section form .btn-shorten:hover i, main section form .btn-shorten:focus-visible i, main section form .btn-copy:hover i, main section form .btn-copy:focus-visible i {
+main section form .btn-send:hover > *, main section form .btn-send:focus-visible > *, main section form .btn-shorten:hover > *, main section form .btn-shorten:focus-visible > *, main section form .btn-copy:hover > *, main section form .btn-copy:focus-visible > * {
   background: var(--bg-lite-h);
 }
-main section form .btn-send:focus-visible i, main section form .btn-shorten:focus-visible i, main section form .btn-copy:focus-visible i {
+main section form .btn-send:focus-visible > *, main section form .btn-shorten:focus-visible > *, main section form .btn-copy:focus-visible > * {
   border: 1px solid var(--border-color);
 }
 main section form .btn-send, main section form .btn-copy {
   transition: transform 0.1s ease-in-out;
 }
-main section form .btn-send:active i, main section form .btn-send[class*=keyboard-active] i, main section form .btn-copy:active i, main section form .btn-copy[class*=keyboard-active] i {
+main section form .btn-send:active > *, main section form .btn-send[class*=keyboard-active] > *, main section form .btn-copy:active > *, main section form .btn-copy[class*=keyboard-active] > * {
   transform: scale(0.75);
 }
 main section form .btn-shorten {
@@ -469,10 +471,48 @@ main section form .btn-shorten, main section form .btn-shorten i {
 main section form .btn-shorten:active i, main section form .btn-shorten[class*=keyboard-active] i {
   transform: translateY(0.4rem);
 }
+main section form .btn-copy {
+  width: calc(var(--_length) * var(--_font-size));
+  transition: transform 0.1s ease-in-out, width 0.1s ease-in-out, color 0.1s linear;
+}
+main section form .btn-copy .success::before {
+  content: "Copied to Clipboard";
+}
+main section form .btn-copy .failure::before {
+  content: "Failed to Copy";
+}
+main section form .btn-copy .success, main section form .btn-copy .failure {
+  font-size: calc(var(--_font-size) / 2);
+  white-space: nowrap;
+  padding: 2rem;
+}
+main section form .btn-copy > div {
+  border-radius: calc(var(--_height) / 2);
+}
+main section form .btn-copy:not([class*=success-]):not([class*=failure-]) {
+  --_length: 2;
+}
+main section form .btn-copy:not([class*=success-]):not([class*=failure-]) .success, main section form .btn-copy:not([class*=success-]):not([class*=failure-]) .failure {
+  display: none;
+}
+main section form .btn-copy[class*=success-] {
+  --_length: 5.70;
+  color: #26dc26;
+}
+main section form .btn-copy[class*=success-] .failure, main section form .btn-copy[class*=success-] i {
+  display: none;
+}
+main section form .btn-copy[class*=failure-] {
+  --_length: 4.42;
+  color: #dc2626;
+}
+main section form .btn-copy[class*=failure-] .success, main section form .btn-copy[class*=failure-] i {
+  display: none;
+}
 main section form.text .btn-send, main section form .btn-shorten, main section form .btn-copy {
   cursor: pointer;
 }
-main section form.text .btn-send i, main section form .btn-shorten i, main section form .btn-copy i {
+main section form.text .btn-send > *, main section form .btn-shorten > *, main section form .btn-copy > * {
   opacity: 1;
 }
 main section form input.disabled {

@@ -464,7 +464,7 @@ main {
                 max-width: 30rem;
                 padding: 0;
                 cursor: not-allowed;
-                &, i {
+                &, > *, i {
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -472,23 +472,25 @@ main {
                     border-radius: 100%;
                 }
                 i {
-                    @include sameSize(100%);
                     position: relative;
                     right: -1px;
+                }
+                > * {
+                    @include sameSize(100%);
                     opacity: .5;
                     background: var(--bg-lite);
                     border: 1px solid transparent;
                 }
-                &:hover i, &:focus-visible i {
+                &:hover > *, &:focus-visible > * {
                     background: var(--bg-lite-h);
                 }
-                &:focus-visible i {
+                &:focus-visible > * {
                     border: 1px solid var(--border-color);
                 }
             }
             .btn-send, .btn-copy {
                 transition: transform $globalduration ease-in-out;
-                &:active i, &[class*="keyboard-active"] i {
+                &:active > *, &[class*="keyboard-active"] > * {
                     transform: scale(.75);
                 }
             }
@@ -502,9 +504,53 @@ main {
                     transform: translateY(.4rem);
                 }
             }
+            .btn-copy {
+                width: calc(var(--_length) * var(--_font-size));
+                transition: transform $globalduration ease-in-out,
+                            width $globalduration ease-in-out,
+                            color $globalduration linear;
+                .success {
+                    &::before {
+                        content: 'Copied to Clipboard';
+                    }
+                }
+                .failure {
+                    &::before {
+                        content: 'Failed to Copy';
+                    }
+                }
+                .success, .failure {
+                    font-size: calc(var(--_font-size) / 2);
+                    white-space: nowrap;
+                    padding: 2rem;
+                }
+                > div {
+                    border-radius: calc(var(--_height) / 2);
+                }
+                &:not([class*='success-']):not([class*='failure-']) {
+                    --_length: 2;
+                    .success, .failure {
+                        display: none;
+                    }
+                }
+                &[class*='success-'] {
+                    --_length: 5.70;
+                    color: #26dc26;
+                    .failure, i {
+                        display: none;
+                    }
+                }
+                &[class*='failure-'] {
+                    --_length: 4.42;
+                    color: #dc2626;
+                    .success, i {
+                        display: none;
+                    }
+                }
+            }
             &.text .btn-send, .btn-shorten, .btn-copy {
                 cursor: pointer;
-                i {
+                > * {
                     opacity: 1;
                 }
             }
