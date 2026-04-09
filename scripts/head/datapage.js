@@ -15,6 +15,9 @@ function pageType() {
     if (getUrlVars(site).a !== undefined && getUrlVars(site).b !== undefined && getUrlVars(site).c !== undefined) {
         html.setAttribute('data-page','shorten');
         window.dataPage = 'shorten';
+    } else if (getUrlVars(site).x !== undefined) {
+        html.setAttribute('data-page','shortened');
+        window.dataPage = 'shortened';
     }
 }
 pageType();

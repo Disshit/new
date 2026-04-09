@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Fontasm";
-  src: url("../fonts/fontasm.woff2?20260220031856") format("woff2"), url("../fonts/fontasm.woff?20260220031856") format("woff");
+  src: url("../fonts/fontasm.woff2?20260226012245") format("woff2"), url("../fonts/fontasm.woff?20260226012245") format("woff");
   font-weight: normal;
   font-style: normal;
 }
@@ -60,7 +60,7 @@
 .fa.fa-downr::before {
   content: "\e00f";
 }
-.fa.fa-expire::before {
+.fa.fa-warning::before {
   content: "\e010";
 }
 .fa.fa-copy::before {

@@ -10,25 +10,48 @@
 // https://disshit.github.io/?a=link&b=asd&c=base64
 // https://disshit.github.io/?a=link&b=asd&c=cypher&d=49
 
-function updateInputField() {
+function updateInputField1() {
     if (window.dataPage !== 'shorten') {return;}
 
-    const inlink = document.querySelector('form #inlink'),
-          newtab = document.querySelector('form .btn-newtab'),
-          site = window.location.href,
-          a = getUrlVars(site).a,
-          b = getUrlVars(site).b,
-          c = getUrlVars(site).c,
-          d = getUrlVars(site).d || '';
+    const inlink = document.querySelector('form #inlink');
+    const newtab = document.querySelector('form .btn-newtab');
+    const site = window.location.href;
+    const a = getUrlVars(site).a;
+    const b = decodeURIComponent(getUrlVars(site).b);
+    const c = getUrlVars(site).c;
+    const d = getUrlVars(site).d || '';
 
-    const link = `${window.location.origin}/get/?${c[0]+d}+${encoding[c].encode(b, d)}${returnType(a)}`;
+    let link;
+
+    if (c === 'raw') {
+        link = `${window.location.origin}/get/?${c[0]+d}+${b}${returnType(a)}`;
+    } else {
+        link = `${window.location.origin}/get/?${c[0]+d}+${encoding[c].encode(b, d)}${returnType(a)}`;
+    }
 
     inlink.value = link;
     newtab.href = link;
     newtab.setAttribute('target','_about');
     inlink.setAttribute('readonly','');
 }
-updateInputField();
+updateInputField1();
+
+function updateInputField2() {
+    if (window.dataPage !== 'shortened') {return;}
+
+    const inlink = document.querySelector('form #inlink');
+    const newtab = document.querySelector('form .btn-newtab');
+    const site = window.location.href;
+    const x = decodeURIComponent(getUrlVars(site).x);
+
+    const link = `https://${x}`;
+
+    inlink.value = link;
+    newtab.href = link;
+    newtab.setAttribute('target','_about');
+    inlink.setAttribute('readonly','');
+}
+updateInputField2();
 
 function returnType(a) {
     if (a === 'link') {return '';}

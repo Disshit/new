@@ -7,6 +7,9 @@ $xxl: 1536px;
 $globalduration: .1s;
 $hoverduration: .075s;
 $globalradius: .8rem;
+$buttonheight: 4.8rem;
+$gapheight: 12.8rem;
+$buttonfontsize: 1.45rem;
 
 @mixin sameSize($size) {
     height: $size;
@@ -28,6 +31,43 @@ $globalradius: .8rem;
     }
 }
 
+@keyframes loading-a {
+    0% {
+        clip-path: polygon(50% 50%,0 0, 50% 0%, 50% 0%, 50% 0%, 50% 0%, 50% 0%);
+    }
+    12.5% {
+        clip-path: polygon(50% 50%,0 0, 50% 0%, 100% 0%, 100% 0%, 100% 0%, 100% 0%);
+    }
+    25% {
+        clip-path: polygon(50% 50%,0 0, 50% 0%, 100% 0%, 100% 100%, 100% 100%, 100% 100%);
+    }
+    50% {
+        clip-path: polygon(50% 50%,0 0, 50% 0%, 100% 0%, 100% 100%, 50% 100%, 0% 100%);
+    }
+    62.5% {
+        clip-path: polygon(50% 50%,100% 0, 100% 0%, 100% 0%, 100% 100%, 50% 100%, 0% 100%);
+    }
+    75% {
+        clip-path: polygon(50% 50%,100% 100%, 100% 100%, 100% 100%, 100% 100%, 50% 100%, 0% 100%);
+    }
+    100% {
+        clip-path: polygon(50% 50%,50% 100%, 50% 100%, 50% 100%, 50% 100%, 50% 100%, 0% 100%);
+    }
+}
+@keyframes loading-b {
+    0% {
+        transform: scaleY(1) rotate(0deg);
+    }
+    49.99% {
+        transform: scaleY(1) rotate(135deg);
+    }
+    50% {
+        transform: scaleY(-1) rotate(0deg);
+    }
+    100% {
+        transform: scaleY(-1) rotate(-135deg);
+    }
+}
 
 * {
     scrollbar-width: thin !important;
@@ -93,6 +133,7 @@ html {
     --logo: 'Cuprum', sans-serif;
     font-size: 10px;
     @include fontSize(9px, $md);
+    @include fontSize(8.5px, $sm);
     &, body {
         @include sameSize(100%);
     }
@@ -226,7 +267,7 @@ main {
             justify-content: center;
             width: 100%;
             gap: 4.8rem;
-            margin: 12.8rem 0 2rem 0; /* Center the input box */
+            margin: $gapheight 0 2rem 0; /* Center the input box */
             @mixin clearbutton() {
                 transform: scale(1);
                 position: relative;
@@ -319,10 +360,11 @@ main {
                 justify-content: center;
                 align-items: center;
                 justify-content: center;
-                width: 100%;
-                gap: 12.8rem; // gap: 3.2rem;
-                @media screen and (max-width: $sm) {
-                    flex-direction: column;
+                width: calc(100% - 4.8rem);
+                transition-duration: 0s;
+                // gap: 3.2rem;
+                .btn-copy, .btn-send {
+                    margin-top: #{$gapheight};
                 }
             }
             subdrop {
@@ -333,8 +375,8 @@ main {
                 gap: 1.6rem;
             }
             dropmenu {
-                --_font-size: 1.5rem;
-                --_height: 4.8rem;
+                --_font-size: #{$buttonfontsize};
+                --_height: #{$buttonheight};
                 --_padding: 2.2rem;
                 font-size: var(--_font-size);
                 position: relative;
@@ -461,7 +503,7 @@ main {
                 font-size: var(--_font-size);
                 height: var(--_height);
                 width: var(--_height);
-                max-width: 30rem;
+                min-width: var(--_height);
                 padding: 0;
                 cursor: not-allowed;
                 &, > *, i {
@@ -471,7 +513,7 @@ main {
                     line-height: 1;
                     border-radius: 100%;
                 }
-                i {
+                i:not(.esc) {
                     position: relative;
                     right: -1px;
                 }
@@ -495,13 +537,42 @@ main {
                 }
             }
             .btn-shorten {
-                --_height: 4.8rem;
-                --_font-size: 1.5rem;
-                &, i {
+                --_height: #{$buttonheight};
+                --_font-size: #{$buttonfontsize};
+                position: relative;
+                .loading {
+                    position: absolute;
+                    width: var(--_font-size);
+                    aspect-ratio: 1;
+                    border-radius: 50%;
+                    border: 2px solid var(--text-color);
+                    animation:
+                        loading-a 0.8s infinite linear alternate,
+                        loading-b 1.6s infinite linear;
+                }
+                &, > * {
                     border-radius: $globalradius;
                 }
-                &:active i, &[class*="keyboard-active"] i {
-                    transform: translateY(.4rem);
+                &[data-state='ready'] {
+                    .loading, .fa-warning {
+                        display: none;
+                    }
+                    &:active > *, &[class*="keyboard-active"] > * {
+                        transform: translateY(.4rem);
+                    }
+                }
+                &[data-state='loading'] {
+                    .fa-right, .fa-warning {
+                        display: none;
+                    }
+                }
+                &[data-state='warning'] {
+                    .fa-right, .loading {
+                        display: none;
+                    }
+                    > div {
+                        background: #dc2626;
+                    }
                 }
             }
             .btn-copy {
@@ -640,7 +711,7 @@ html {
             display: none !important;
         }
     }
-    &[data-page="shorten"] {
+    &[data-page="shorten"], &[data-page="shortened"] {
         .link-type li:not(.active),
         dropmenu[data-type="encoding"],
         form .input label,
@@ -657,6 +728,14 @@ html {
                     font-size: calc(var(--li-size) - var(--li-padding) * 0);
                 }
             }
+        }
+    }
+    &[data-page="shortened"] {
+        subdrop {
+            display: none !important;
+        }
+        main section form sub {
+            padding-top: #{$buttonheight};
         }
     }
 }

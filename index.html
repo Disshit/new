@@ -122,7 +122,7 @@
                      </div>
                      <div class="op-list">
                         <ul>
-                           <li data-option="none">
+                           <li data-option="raw">
                               <span>None</span>
                               <i class="fa fa-tick"></i>
                            </li>
@@ -180,8 +180,12 @@
                            </ul>
                         </div>
                      </dropmenu>
-                     <button type="button" class="btn-shorten" tabindex="0">
-                        <i class="fa fa-right"></i>
+                     <button type="button" class="btn-shorten" data-state="ready" tabindex="0">
+                        <div>
+                           <i class="fa fa-right"></i>
+                           <div class="loading"></div>
+                           <i class="fa fa-warning esc"></i>
+                        </div>
                      </button>
                   </subdrop>
                   <button type="submit" class="btn-send" tabindex="-1">

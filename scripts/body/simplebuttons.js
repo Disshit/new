@@ -31,6 +31,12 @@ function shortenLink() {
     const service = document.querySelector('dropmenu[data-type="shortening"] input').value;
     const inlink = document.querySelector('#inlink');
     const newtab = document.querySelector('form .btn-newtab');
+    const shortenbtn = document.querySelector('form .btn-shorten');
+    const html = document.documentElement;
+
+    if (shortenbtn.getAttribute('data-state') !== 'ready') {return;}
+
+    shortenbtn.setAttribute('data-state','loading');
 
     shortening[service](inlink.value).then((res) => {
         if (typeof res === 'string') {
@@ -38,17 +44,18 @@ function shortenLink() {
             inlink.value = res;
             newtab.setAttribute('href', res);
             window.history.pushState(null, '', '/?x=' + encodeURIComponent(res.replace(/^https:\/\//,'')));
+            html.setAttribute('data-page','shortened');
+            window.dataPage = 'shortened';
         } else {
             throw res;
         }
     }).catch(err => {
         console.error('Failed to copy: ', err);
+        shortenbtn.setAttribute('data-state','warning');
+        setTimeout(() => {
+            shortenbtn.setAttribute('data-state','ready');
+        }, 1250);
     });
 }
 
 document.querySelector('form .btn-shorten').addEventListener('click', shortenLink);
-
-// Refresh page for popstate
-window.addEventListener('popstate', () => {
-    window.location.reload();
-});

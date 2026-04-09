@@ -1,4 +1,4 @@
-$version: 20260220031856;
+$version: 20260226012245;
 
 @font-face {
     font-family: 'Fontasm';
@@ -64,7 +64,7 @@ $version: 20260220031856;
     &.fa-downr::before {
         content: '\E00F';
     }
-    &.fa-expire::before {
+    &.fa-warning::before {
         content: '\E010';
     }
     &.fa-copy::before {

@@ -6,6 +6,43 @@
     opacity: 0.2;
   }
 }
+@keyframes loading-a {
+  0% {
+    clip-path: polygon(50% 50%, 0 0, 50% 0%, 50% 0%, 50% 0%, 50% 0%, 50% 0%);
+  }
+  12.5% {
+    clip-path: polygon(50% 50%, 0 0, 50% 0%, 100% 0%, 100% 0%, 100% 0%, 100% 0%);
+  }
+  25% {
+    clip-path: polygon(50% 50%, 0 0, 50% 0%, 100% 0%, 100% 100%, 100% 100%, 100% 100%);
+  }
+  50% {
+    clip-path: polygon(50% 50%, 0 0, 50% 0%, 100% 0%, 100% 100%, 50% 100%, 0% 100%);
+  }
+  62.5% {
+    clip-path: polygon(50% 50%, 100% 0, 100% 0%, 100% 0%, 100% 100%, 50% 100%, 0% 100%);
+  }
+  75% {
+    clip-path: polygon(50% 50%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 50% 100%, 0% 100%);
+  }
+  100% {
+    clip-path: polygon(50% 50%, 50% 100%, 50% 100%, 50% 100%, 50% 100%, 50% 100%, 0% 100%);
+  }
+}
+@keyframes loading-b {
+  0% {
+    transform: scaleY(1) rotate(0deg);
+  }
+  49.99% {
+    transform: scaleY(1) rotate(135deg);
+  }
+  50% {
+    transform: scaleY(-1) rotate(0deg);
+  }
+  100% {
+    transform: scaleY(-1) rotate(-135deg);
+  }
+}
 * {
   scrollbar-width: thin !important;
   scrollbar-color: var(--accent-color) rgba(0, 0, 0, 0) !important;
@@ -78,6 +115,11 @@ html {
 @media screen and (max-width: 768px) {
   html {
     font-size: 9px;
+  }
+}
+@media screen and (max-width: 640px) {
+  html {
+    font-size: 8.5px;
   }
 }
 html, html body {
@@ -301,13 +343,11 @@ main section form sub {
   justify-content: center;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  gap: 12.8rem;
+  width: calc(100% - 4.8rem);
+  transition-duration: 0s;
 }
-@media screen and (max-width: 640px) {
-  main section form sub {
-    flex-direction: column;
-  }
+main section form sub .btn-copy, main section form sub .btn-send {
+  margin-top: 12.8rem;
 }
 main section form subdrop {
   display: flex;
@@ -317,7 +357,7 @@ main section form subdrop {
   gap: 1.6rem;
 }
 main section form dropmenu {
-  --_font-size: 1.5rem;
+  --_font-size: 1.45rem;
   --_height: 4.8rem;
   --_padding: 2.2rem;
   font-size: var(--_font-size);
@@ -427,7 +467,7 @@ main section form .btn-send, main section form .btn-shorten, main section form .
   font-size: var(--_font-size);
   height: var(--_height);
   width: var(--_height);
-  max-width: 30rem;
+  min-width: var(--_height);
   padding: 0;
   cursor: not-allowed;
 }
@@ -438,7 +478,7 @@ main section form .btn-send, main section form .btn-send > *, main section form 
   line-height: 1;
   border-radius: 100%;
 }
-main section form .btn-send i, main section form .btn-shorten i, main section form .btn-copy i {
+main section form .btn-send i:not(.esc), main section form .btn-shorten i:not(.esc), main section form .btn-copy i:not(.esc) {
   position: relative;
   right: -1px;
 }
@@ -463,13 +503,34 @@ main section form .btn-send:active > *, main section form .btn-send[class*=keybo
 }
 main section form .btn-shorten {
   --_height: 4.8rem;
-  --_font-size: 1.5rem;
+  --_font-size: 1.45rem;
+  position: relative;
 }
-main section form .btn-shorten, main section form .btn-shorten i {
+main section form .btn-shorten .loading {
+  position: absolute;
+  width: var(--_font-size);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 2px solid var(--text-color);
+  animation: loading-a 0.8s infinite linear alternate, loading-b 1.6s infinite linear;
+}
+main section form .btn-shorten, main section form .btn-shorten > * {
   border-radius: 0.8rem;
 }
-main section form .btn-shorten:active i, main section form .btn-shorten[class*=keyboard-active] i {
+main section form .btn-shorten[data-state=ready] .loading, main section form .btn-shorten[data-state=ready] .fa-warning {
+  display: none;
+}
+main section form .btn-shorten[data-state=ready]:active > *, main section form .btn-shorten[data-state=ready][class*=keyboard-active] > * {
   transform: translateY(0.4rem);
+}
+main section form .btn-shorten[data-state=loading] .fa-right, main section form .btn-shorten[data-state=loading] .fa-warning {
+  display: none;
+}
+main section form .btn-shorten[data-state=warning] .fa-right, main section form .btn-shorten[data-state=warning] .loading {
+  display: none;
+}
+main section form .btn-shorten[data-state=warning] > div {
+  background: #dc2626;
 }
 main section form .btn-copy {
   width: calc(var(--_length) * var(--_font-size));
@@ -587,13 +648,23 @@ html[data-page=shorten] .link-type li:not(.active),
 html[data-page=shorten] dropmenu[data-type=encoding],
 html[data-page=shorten] form .input label,
 html[data-page=shorten] .btn-send,
-html[data-page=shorten] .btn-clear {
+html[data-page=shorten] .btn-clear, html[data-page=shortened] .link-type li:not(.active),
+html[data-page=shortened] dropmenu[data-type=encoding],
+html[data-page=shortened] form .input label,
+html[data-page=shortened] .btn-send,
+html[data-page=shortened] .btn-clear {
   display: none !important;
 }
-html[data-page=shorten] .link-type li.active span {
+html[data-page=shorten] .link-type li.active span, html[data-page=shortened] .link-type li.active span {
   cursor: default;
   background: unset;
 }
-html[data-page=shorten] .link-type li.active span i {
+html[data-page=shorten] .link-type li.active span i, html[data-page=shortened] .link-type li.active span i {
   font-size: calc(var(--li-size) - var(--li-padding) * 0);
+}
+html[data-page=shortened] subdrop {
+  display: none !important;
+}
+html[data-page=shortened] main section form sub {
+  padding-top: 4.8rem;
 }/*# sourceMappingURL=main.css.map */
