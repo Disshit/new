@@ -7,6 +7,9 @@ function toggleMenu(e) {
 
 // Toggle drop down menus
 function toggleOption(e) {
+    // If blockmenu is active on any parent, exit right away
+    if (e.target.closest('.blockmenu')) {return;}
+
     if (e.target.closest('.op-button')) {
         e.target.closest('dropmenu').classList.toggle('expanded');
 

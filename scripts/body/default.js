@@ -14,7 +14,7 @@ function defaultEncoding() {
           encodingInput = encodingNode.querySelector('input'),
           encodingOption = encodingNode.querySelector(`li[data-option="${encodingChoice}"]`);
 
-    encodingNode.querySelector('.value').textContent = encodingOption.textContent;
+    encodingNode.querySelector('.value').textContent = encodingOption.querySelector('span').textContent;
     encodingInput.value = encodingChoice;
     encodingOption.classList.add('active');
 }
@@ -25,7 +25,7 @@ function defaultShortening() {
           shorteningInput = shorteningNode.querySelector('input'),
           shorteningOption = shorteningNode.querySelector(`li[data-option="${shorteningChoice}"]`);
 
-    shorteningNode.querySelector('.value').textContent = shorteningOption.textContent;
+    shorteningNode.querySelector('.value').textContent = shorteningOption.querySelector('span').textContent;
     shorteningInput.value = shorteningChoice;
     shorteningOption.classList.add('active');
 }

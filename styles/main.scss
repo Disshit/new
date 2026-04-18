@@ -373,6 +373,61 @@ main {
                 justify-content: center;
                 width: 100%;
                 gap: 1.6rem;
+                transition: opacity $globalduration linear;
+                opacity: 1;
+                position: relative;
+                &:not([data-state='ready']) {
+                    dropmenu .op-button div {
+                        transform: unset;
+                    }
+                }
+                &[data-state='ready'] {
+                    .btn-shorten {
+                        .loading, .fa-warning, .fa-tick {
+                            display: none;
+                        }
+                        &:active > *, &[class*="keyboard-active"] > * {
+                            transform: translateY(.4rem);
+                        }
+                    }
+                }
+                &[data-state='loading'], &[data-state='warning'], &[data-state*='success'] {
+                    .op-button {
+                        anicon {
+                            opacity: .15;
+                        }
+                    }
+                }
+                &[data-state='loading'] {
+                    .btn-shorten {
+                        .fa-right, .fa-warning, .fa-tick {
+                            display: none;
+                        }
+                    }
+                }
+                &[data-state='warning'] {
+                    .btn-shorten {
+                        .fa-right, .loading, .fa-tick {
+                            display: none;
+                        }
+                        > div {
+                            background: var(--red);
+                        }
+                    }
+                }
+                &[data-state*='success'] {
+                    .btn-shorten {
+                        .fa-right, .loading, .fa-warning {
+                            display: none;
+                        }
+                        > div {
+                            background: var(--green);
+                        }
+                    }
+                }
+                &[data-state*='fadeout'] {
+                    opacity: 0;
+                }
             }
             dropmenu {
                 --_font-size: #{$buttonfontsize};
@@ -388,7 +443,6 @@ main {
                 cursor: pointer;
                 .op-button {
                     @include sameSize(100%);
-                    overflow: hidden;
                     div {
                         @include sameSize(100%);
                         display: flex;
@@ -413,15 +467,16 @@ main {
                         }
                     }
                     anicon {
-                        .fa-downl {
-                            transform-origin: 33.62% 50%;
-                            transform: rotate(0deg);
+                        .fa-bar:nth-of-type(1) {
+                            transform-origin: 33.6187% 50%;
+                            transform: rotate(45deg) translateX(-.3rem);
                         }
-                        .fa-downr {
-                            transform-origin: 66.38% 50%;
-                            transform: rotate(0deg);
+                        .fa-bar:nth-of-type(2) {
+                            transform-origin: 66.3813% 50%;
+                            transform: rotate(-45deg) translateX(.3rem);
                         }
                         i {
+                            font-size: 1.8rem;
                             transition: transform $globalduration linear;
                         }
                     }
@@ -484,11 +539,11 @@ main {
                 &.expanded {
                     .op-button {
                         anicon {
-                            .fa-downl {
-                                transform: rotate(90deg);
+                            .fa-bar:nth-of-type(1) {
+                                transform: rotate(135deg) translateX(-.3rem);
                             }
-                            .fa-downr {
-                                transform: rotate(-90deg);
+                            .fa-bar:nth-of-type(2) {
+                                transform: rotate(-135deg) translateX(.3rem);
                             }
                         }
                     }
@@ -553,27 +608,6 @@ main {
                 &, > * {
                     border-radius: $globalradius;
                 }
-                &[data-state='ready'] {
-                    .loading, .fa-warning {
-                        display: none;
-                    }
-                    &:active > *, &[class*="keyboard-active"] > * {
-                        transform: translateY(.4rem);
-                    }
-                }
-                &[data-state='loading'] {
-                    .fa-right, .fa-warning {
-                        display: none;
-                    }
-                }
-                &[data-state='warning'] {
-                    .fa-right, .loading {
-                        display: none;
-                    }
-                    > div {
-                        background: #dc2626;
-                    }
-                }
             }
             .btn-copy {
                 width: calc(var(--_length) * var(--_font-size));
@@ -606,14 +640,14 @@ main {
                 }
                 &[class*='success-'] {
                     --_length: 5.70;
-                    color: #26dc26;
+                    color: var(--green);
                     .failure, i {
                         display: none;
                     }
                 }
                 &[class*='failure-'] {
                     --_length: 4.42;
-                    color: #dc2626;
+                    color: var(--red);
                     .success, i {
                         display: none;
                     }
@@ -667,7 +701,7 @@ main {
                                 border: 1px solid var(--border-color);
                             }
                         }
-                        &:not(.active):active, &[class*="keyboard-active"] {
+                        &:not(.active):active, &:not(.active)[class*="keyboard-active"] {
                             span {
                                 transform: scale(.8);
                             }

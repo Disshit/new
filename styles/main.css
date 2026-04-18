@@ -355,6 +355,39 @@ main section form subdrop {
   justify-content: center;
   width: 100%;
   gap: 1.6rem;
+  transition: opacity 0.1s linear;
+  opacity: 1;
+  position: relative;
+}
+main section form subdrop:not([data-state=ready]) dropmenu .op-button div {
+  transform: unset;
+}
+main section form subdrop[data-state=ready] .btn-shorten .loading, main section form subdrop[data-state=ready] .btn-shorten .fa-warning, main section form subdrop[data-state=ready] .btn-shorten .fa-tick {
+  display: none;
+}
+main section form subdrop[data-state=ready] .btn-shorten:active > *, main section form subdrop[data-state=ready] .btn-shorten[class*=keyboard-active] > * {
+  transform: translateY(0.4rem);
+}
+main section form subdrop[data-state=loading] .op-button anicon, main section form subdrop[data-state=warning] .op-button anicon, main section form subdrop[data-state*=success] .op-button anicon {
+  opacity: 0.15;
+}
+main section form subdrop[data-state=loading] .btn-shorten .fa-right, main section form subdrop[data-state=loading] .btn-shorten .fa-warning, main section form subdrop[data-state=loading] .btn-shorten .fa-tick {
+  display: none;
+}
+main section form subdrop[data-state=warning] .btn-shorten .fa-right, main section form subdrop[data-state=warning] .btn-shorten .loading, main section form subdrop[data-state=warning] .btn-shorten .fa-tick {
+  display: none;
+}
+main section form subdrop[data-state=warning] .btn-shorten > div {
+  background: var(--red);
+}
+main section form subdrop[data-state*=success] .btn-shorten .fa-right, main section form subdrop[data-state*=success] .btn-shorten .loading, main section form subdrop[data-state*=success] .btn-shorten .fa-warning {
+  display: none;
+}
+main section form subdrop[data-state*=success] .btn-shorten > div {
+  background: var(--green);
+}
+main section form subdrop[data-state*=fadeout] {
+  opacity: 0;
 }
 main section form dropmenu {
   --_font-size: 1.45rem;
@@ -372,7 +405,6 @@ main section form dropmenu {
 main section form dropmenu .op-button {
   height: 100%;
   width: 100%;
-  overflow: hidden;
 }
 main section form dropmenu .op-button div {
   height: 100%;
@@ -394,15 +426,16 @@ main section form dropmenu .op-button div span.value {
   text-align: right;
   flex: 1 0 auto;
 }
-main section form dropmenu .op-button anicon .fa-downl {
-  transform-origin: 33.62% 50%;
-  transform: rotate(0deg);
+main section form dropmenu .op-button anicon .fa-bar:nth-of-type(1) {
+  transform-origin: 33.6187% 50%;
+  transform: rotate(45deg) translateX(-0.3rem);
 }
-main section form dropmenu .op-button anicon .fa-downr {
-  transform-origin: 66.38% 50%;
-  transform: rotate(0deg);
+main section form dropmenu .op-button anicon .fa-bar:nth-of-type(2) {
+  transform-origin: 66.3813% 50%;
+  transform: rotate(-45deg) translateX(0.3rem);
 }
 main section form dropmenu .op-button anicon i {
+  font-size: 1.8rem;
   transition: transform 0.1s linear;
 }
 main section form dropmenu .op-button:hover div, main section form dropmenu .op-button:focus-visible div {
@@ -452,11 +485,11 @@ main section form dropmenu .op-list ul li:last-child {
 main section form dropmenu .op-list ul li:not(.active) .fa {
   display: none;
 }
-main section form dropmenu.expanded .op-button anicon .fa-downl {
-  transform: rotate(90deg);
+main section form dropmenu.expanded .op-button anicon .fa-bar:nth-of-type(1) {
+  transform: rotate(135deg) translateX(-0.3rem);
 }
-main section form dropmenu.expanded .op-button anicon .fa-downr {
-  transform: rotate(-90deg);
+main section form dropmenu.expanded .op-button anicon .fa-bar:nth-of-type(2) {
+  transform: rotate(-135deg) translateX(0.3rem);
 }
 main section form dropmenu.expanded .op-list {
   height: calc(var(--_height) * var(--_count) + (var(--_padding)));
@@ -517,21 +550,6 @@ main section form .btn-shorten .loading {
 main section form .btn-shorten, main section form .btn-shorten > * {
   border-radius: 0.8rem;
 }
-main section form .btn-shorten[data-state=ready] .loading, main section form .btn-shorten[data-state=ready] .fa-warning {
-  display: none;
-}
-main section form .btn-shorten[data-state=ready]:active > *, main section form .btn-shorten[data-state=ready][class*=keyboard-active] > * {
-  transform: translateY(0.4rem);
-}
-main section form .btn-shorten[data-state=loading] .fa-right, main section form .btn-shorten[data-state=loading] .fa-warning {
-  display: none;
-}
-main section form .btn-shorten[data-state=warning] .fa-right, main section form .btn-shorten[data-state=warning] .loading {
-  display: none;
-}
-main section form .btn-shorten[data-state=warning] > div {
-  background: #dc2626;
-}
 main section form .btn-copy {
   width: calc(var(--_length) * var(--_font-size));
   transition: transform 0.1s ease-in-out, width 0.1s ease-in-out, color 0.1s linear;
@@ -558,14 +576,14 @@ main section form .btn-copy:not([class*=success-]):not([class*=failure-]) .succe
 }
 main section form .btn-copy[class*=success-] {
   --_length: 5.70;
-  color: #26dc26;
+  color: var(--green);
 }
 main section form .btn-copy[class*=success-] .failure, main section form .btn-copy[class*=success-] i {
   display: none;
 }
 main section form .btn-copy[class*=failure-] {
   --_length: 4.42;
-  color: #dc2626;
+  color: var(--red);
 }
 main section form .btn-copy[class*=failure-] .success, main section form .btn-copy[class*=failure-] i {
   display: none;
@@ -617,7 +635,7 @@ main section form sup .link-type li:hover span, main section form sup .link-type
 main section form sup .link-type li:focus-visible span {
   border: 1px solid var(--border-color);
 }
-main section form sup .link-type li:not(.active):active span, main section form sup .link-type li[class*=keyboard-active] span {
+main section form sup .link-type li:not(.active):active span, main section form sup .link-type li:not(.active)[class*=keyboard-active] span {
   transform: scale(0.8);
 }
 main section form sup .link-type li.active span {

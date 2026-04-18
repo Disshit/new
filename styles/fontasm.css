@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Fontasm";
-  src: url("../fonts/fontasm.woff2?20260226012245") format("woff2"), url("../fonts/fontasm.woff?20260226012245") format("woff");
+  src: url("../fonts/fontasm.woff2?20260317225626") format("woff2"), url("../fonts/fontasm.woff?20260317225626") format("woff");
   font-weight: normal;
   font-style: normal;
 }
@@ -54,15 +54,12 @@
 .fa.fa-gdrive::before {
   content: "\e00d";
 }
-.fa.fa-downl::before {
+.fa.fa-bar::before {
   content: "\e00e";
 }
-.fa.fa-downr::before {
+.fa.fa-warning::before {
   content: "\e00f";
 }
-.fa.fa-warning::before {
-  content: "\e010";
-}
 .fa.fa-copy::before {
-  content: "\e011";
+  content: "\e010";
 }/*# sourceMappingURL=fontasm.css.map */

@@ -1,4 +1,4 @@
-$version: 20260226012245;
+$version: 20260317225626;
 
 @font-face {
     font-family: 'Fontasm';
@@ -58,16 +58,13 @@ $version: 20260226012245;
     &.fa-gdrive::before {
         content: '\E00D';
     }
-    &.fa-downl::before {
+    &.fa-bar::before {
         content: '\E00E';
     }
-    &.fa-downr::before {
+    &.fa-warning::before {
         content: '\E00F';
     }
-    &.fa-warning::before {
-        content: '\E010';
-    }
     &.fa-copy::before {
-        content: '\E011';
+        content: '\E010';
     }
 }
