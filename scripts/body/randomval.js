@@ -2,7 +2,7 @@
 function setEncodingValue() {
     if (window.dataPage !== 'home') {return;}
 
-    let encodingNode = document.querySelector('form dropmenu[data-type="encoding"]'),
+    let encodingNode = document.querySelector('dropmenu[data-type="encoding"]'),
         encodingChoice = encodingNode.querySelector('.op-list li.active').getAttribute('data-option'),
         encodingRandom = encodingNode.querySelector('input.random');
 

@@ -24,9 +24,13 @@ function updateInputField1() {
     let link;
 
     if (c === 'raw') {
-        link = `${window.location.origin}/get/?${c[0]+d}+${b}${returnType(a)}`;
+        link = `${window.location.origin}/get/?${c[0]+d}+${encodeURIComponent(b)}${returnType(a)}`;
+    } else if (c === 'cypher') {
+        link = `${window.location.origin}/get/?${c[0]+d}+${encodeURIComponent(encoding[c].encode(b, parseInt(d)))}${returnType(a)}`;
+    } else if (c === 'scrypto') {
+        link = `${window.location.origin}/get/?${c[0]+d}+${encodeURIComponent(encoding[c].encode(b, d))}${returnType(a)}`;
     } else {
-        link = `${window.location.origin}/get/?${c[0]+d}+${encoding[c].encode(b, d)}${returnType(a)}`;
+        link = `${window.location.origin}/get/?${c[0]+d}+${encodeURIComponent(encoding[c].encode(b))}${returnType(a)}`;
     }
 
     inlink.value = link;

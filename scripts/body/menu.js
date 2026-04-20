@@ -1,7 +1,10 @@
 // Open and close main menu
 function toggleMenu(e) {
     if (e.target.closest('.btn-menu')) {
-        document.body.classList.toggle('open-menu');
+        document.body.classList.toggle('showmenu');
+        if (document.body.className === '') {
+            document.body.removeAttribute('class');
+        }
     }
 }
 
@@ -12,9 +15,12 @@ function toggleOption(e) {
 
     if (e.target.closest('.op-button')) {
         e.target.closest('dropmenu').classList.toggle('expanded');
+        if (e.target.closest('dropmenu').className === '') {
+            e.target.closest('dropmenu').removeAttribute('class');
+        }
 
         // Close overlapping menu on smaller displays
-        let computedStyle = window.getComputedStyle(document.querySelector('sub'));
+        let computedStyle = window.getComputedStyle(document.querySelector('.sub'));
         if (computedStyle.getPropertyValue('flex-direction').match('column')) {
             document.querySelector(`option:not([data-type="${e.target.closest('dropmenu').getAttribute('data-type')}"])`).classList.remove('expanded');
         }
@@ -34,6 +40,9 @@ function updateOption(e) {
         e.target.closest('li').classList.add('active');
         setTimeout(() => {
             e.target.closest('dropmenu').classList.remove('expanded');
+            if (e.target.closest('dropmenu').className === '') {
+                e.target.closest('dropmenu').removeAttribute('class');
+            }
         }, 50);
     }
     setEncodingValue();
@@ -45,6 +54,9 @@ function closeOption(e) {
         let options = document.querySelectorAll('dropmenu');
         for (let x = 0; x < options.length; x++) {
             options[x].classList.remove('expanded');
+            if (options[x].className === '') {
+                options[x].removeAttribute('class');
+            }
         }
     }
 }
@@ -53,8 +65,8 @@ function closeOption(e) {
 function linkType(eT) {
     if (!eT.closest('.link-type') || !eT.closest('li')) {return;}
 
-    if (document.querySelector('sup .link-type .active')) {
-        let lActive = document.querySelector('sup .link-type .active');
+    if (document.querySelector('.sup .link-type .active')) {
+        let lActive = document.querySelector('.sup .link-type .active');
         if (lActive !== eT.closest('li')) {
             lActive.classList.remove('active');
         }
@@ -85,12 +97,12 @@ document.addEventListener('click', (e) => {
 
 // Sliding across on touch devices
 document.addEventListener('touchstart', (e) => {
-    try {document.querySelector('sup .link-type').classList.add('sliding');} catch {}
+    try {document.querySelector('.sup .link-type').classList.add('sliding');} catch {}
 });
 document.addEventListener('touchend', (e) => {
-    try {document.querySelector('sup .link-type').classList.remove('sliding');} catch {}
+    try {document.querySelector('.sup .link-type').classList.remove('sliding');} catch {}
 });
-document.querySelector('sup .link-type').addEventListener('touchmove', (e) => {
+document.querySelector('.sup .link-type').addEventListener('touchmove', (e) => {
     const eUF = document.elementFromPoint(
         e.touches[0].clientX,
         e.touches[0].clientY
