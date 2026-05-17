@@ -8,10 +8,12 @@ function reShade(color, amount) {
 const darkTheme = `
     html, html[data-dark="default"] {
         --accent-color: #ec9918;
+        --accent-faded: #ec991888;
         --accent-lite: #f2d230;
         --accent-deep: #e56000;
         --text-color: #f8fafc;
         --bg-deep: #212121;
+        --bg-deeper: ${reShade('#212121', -4)};
         --bg-lite: ${reShade('#212121', 6)};
         --bg-lite-h: ${reShade('#212121', 11)};
         --bg-lite-hh: ${reShade('#212121', 18)};

@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Fontasm";
-  src: url("../fonts/fontasm.woff2?20260317225626") format("woff2"), url("../fonts/fontasm.woff?20260317225626") format("woff");
+  src: url("../fonts/fontasm.woff2?20260417020722") format("woff2"), url("../fonts/fontasm.woff?20260417020722") format("woff");
   font-weight: normal;
   font-style: normal;
 }
@@ -62,4 +62,10 @@
 }
 .fa.fa-copy::before {
   content: "\e010";
+}
+.fa.fa-image::before {
+  content: "\e011";
+}
+.fa.fa-pastefox::before {
+  content: "\e012";
 }/*# sourceMappingURL=fontasm.css.map */

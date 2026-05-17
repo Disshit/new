@@ -18,13 +18,19 @@ $globalsidepadding: 0 3.2rem;
 }
 
 @mixin fontSize($fSize, $mWidth) {
-    @media screen and (max-width: $mWidth) {
+    @media screen and (max-width: ($mWidth - 0.02px)) {
         font-size: $fSize;
     }
 }
 
+@mixin dynamicColumn($mWidth, $gap, $column) {
+    @media screen and (min-width: $mWidth) {
+        width: calc((100% - ($gap * ($column - 1))) / $column);
+    }
+}
+
 @mixin transition() {
-    transition-duration: $hoverduration;
+    transition-duration: var(--hover-duration);
     transition-timing-function: ease-in-out;
 }
 
@@ -105,14 +111,14 @@ $globalsidepadding: 0 3.2rem;
     background: var(--accent-color);
 }
 
-circle, dot,
+.circle, .dot,
 button, ul, li,
 h1, h2, h3, h4, h5, h6,
 menu {
     all: unset;
 }
 
-circle, dot {
+.circle, .dot {
     @include transition();
     @include borderBox();
 }
@@ -128,6 +134,11 @@ a {
     }
 }
 
+i {
+    line-height: 1 !important;
+    height: fit-content;
+}
+
 header, footer, .options, form label, dropmenu {
     -webkit-touch-callout: none;
     user-select: none;
@@ -138,9 +149,7 @@ anicon {
     align-items: center;
     justify-content: center;
     position: relative;
-    &, i {
-        line-height: 1 !important;
-    }
+    line-height: 1 !important;
     i:not(:first-of-type) {
         position: absolute;
         left: 0;
@@ -148,13 +157,65 @@ anicon {
     }
 }
 
+.material-switch {
+    --_rem: 1rem;
+    --_track-width: 3.6;
+    --_thumb-size: 1.8;
+	display: inline-flex;
+	align-items: center;
+	gap: calc(1.2 * var(--_rem));
+	cursor: pointer;
+	user-select: none;
+	.material-track {
+		position: relative;
+		display: inline-block;
+		width: calc(var(--_track-width) * var(--_rem));
+		height: calc(1.4 * var(--_rem));
+		border-radius: calc(.7 * var(--_rem));
+        background: linear-gradient(to right, var(--accent-faded) 50%, var(--bg-deeper) 50%);
+        background-size: 200% 100%;
+        background-position: 100% 0;
+		transition: background-position var(--global-duration) ease-out;
+	}
+	.material-thumb {
+		position: absolute;
+		top: 50%;
+		left: 0;
+		transform: translateY(-50%);
+		@include sameSize(calc(var(--_thumb-size) * var(--_rem)));
+		background-color: var(--text-color);
+		border-radius: 50%;
+		box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 
+				    0px 4px 5px 0px rgba(0,0,0,0.14), 
+				    0px 1px 10px 0px rgba(0,0,0,0.12);
+		transition: transform var(--global-duration) ease-out,
+				    background-color var(--global-duration) ease, 
+				    box-shadow var(--global-duration) ease;
+	}
+	input[type='checkbox'] {
+		position: absolute;
+		opacity: 0;
+		width: 0;
+		height: 0;
+		&:checked + .material-track {
+			background-position: 0% 0;
+			.material-thumb {
+				transform: translate(calc((var(--_track-width) - var(--_thumb-size)) * var(--_rem)), -50%);
+				background-color: var(--accent-color);
+			}
+		}
+	}
+}
+
 html {
+    --global-duration: #{$globalduration};
+    --hover-duration: #{$hoverduration};
     --sans: 'Radio Canada', sans-serif;
     --mono: 'Courier Prime', monospace;
     --logo: 'Cuprum', sans-serif;
     font-size: 62.5%;//10px;
-    // @include fontSize(9px, $md);
-    // @include fontSize(8.5px, $sm);
+    @include fontSize(56.25%, $md);//9px
+    @include fontSize(53.125%, $sm);//8.5px
     &, body {
         @include sameSize(100%);
     }
@@ -165,6 +226,10 @@ html {
         padding: 0;
         background: var(--bg-deep);
         color: var(--text-color);
+        &.noduration {
+            --global-duration: 0s;
+            --hover-duration: 0s;
+        }
     }
 }
 
@@ -221,7 +286,7 @@ header {
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        circle {
+        .circle {
             @include sameSize(3.6rem);
             background: transparent;
             border: .35rem solid var(--text-color);
@@ -230,7 +295,7 @@ header {
             display: flex;
             align-items: center;
             justify-content: center;
-            dot {
+            .dot {
                 @include sameSize(2.2rem);
                 border-radius: 100%;
                 background: var(--text-color);
@@ -238,12 +303,12 @@ header {
             }
         }
         &:hover, &:focus-visible, &:active, &[class*="keyboard-active"] {
-            circle {
+            .circle {
                 animation: unset;
             }
         }
         &:active, &[class*="keyboard-active"] {
-            circle {
+            .circle {
                 transform: scale(.65);
             }
         }
@@ -330,13 +395,13 @@ content main {
                 font-size: var(--_font-size);
                 transform: scale(0);
                 position: absolute;
+                line-height: 1 !important;
                 right: 0;
                 z-index: 2;
                 &, i {
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    line-height: 1;
                 }
                 i {
                     background: transparent;
@@ -385,7 +450,7 @@ content main {
             justify-content: center;
             width: 100%;
             gap: 1.6rem;
-            transition: opacity $globalduration linear;
+            transition: opacity var(--global-duration) linear;
             opacity: 1;
             position: relative;
             &:not([data-state='ready']) {
@@ -489,7 +554,7 @@ content main {
                     }
                     i {
                         font-size: 1.8rem;
-                        transition: transform $globalduration linear;
+                        transition: transform var(--global-duration) linear;
                     }
                 }
                 &:hover, &:focus-visible {
@@ -577,7 +642,7 @@ content main {
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                line-height: 1;
+                line-height: 1 !important;
                 border-radius: 100%;
             }
             i:not(.esc) {
@@ -598,7 +663,7 @@ content main {
             }
         }
         .btn-send, .btn-copy {
-            transition: transform $globalduration ease-in-out;
+            transition: transform var(--global-duration) ease-in-out;
             &:active > *, &[class*="keyboard-active"] > * {
                 transform: scale(.75);
             }
@@ -623,9 +688,9 @@ content main {
         }
         .btn-copy {
             width: calc(var(--_length) * var(--_font-size));
-            transition: transform $globalduration ease-in-out,
-                        width $globalduration ease-in-out,
-                        color $globalduration linear;
+            transition: transform var(--global-duration) ease-in-out,
+                        width var(--global-duration) ease-in-out,
+                        color var(--global-duration) linear;
             .success {
                 &::before {
                     content: 'Copied to Clipboard';
@@ -686,12 +751,12 @@ content main {
                 align-items: center;
                 justify-content: center;
                 gap: 2rem;
-                transition: gap $globalduration ease-in-out;
+                transition: gap var(--global-duration) ease-in-out;
                 li {
                     --li-size: 6rem;
                     --li-padding: 1rem;
                     @include sameSize(calc(var(--li-size) + (var(--li-padding) * 2)));
-                    transition: transform $globalduration ease-in-out, margin $globalduration ease-in-out;
+                    transition: transform var(--global-duration) ease-in-out, margin var(--global-duration) ease-in-out;
                     span {
                         @include sameSize(100%);
                         display: flex;
@@ -701,7 +766,7 @@ content main {
                         background: var(--bg-lite);
                         cursor: pointer;
                         border: 1px solid transparent;
-                        transition: background $hoverduration ease-in-out, transform $globalduration ease-in-out;
+                        transition: background var(--hover-duration) ease-in-out, transform var(--global-duration) ease-in-out;
                     }
                     &:hover, &:focus-visible {
                         span {
@@ -723,9 +788,8 @@ content main {
                             color: var(--accent-color);
                         }
                     }
-                    .fa {
+                    i {
                         font-size: calc(var(--li-size) - (var(--li-padding) * 2));
-                        line-height: 1;
                     }
                 }
                 &:has(li.active) {
@@ -755,10 +819,15 @@ content menu {
     display: flex;
     flex-direction: column;
     @include sameSize(100%);
+    max-width: $lg;
     background: var(--bg-deep);
     padding: $globalsidepadding;
     // backdrop-filter: blur(2rem);
     section {
+        --_gap: 2rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--_gap);
         padding-top: 1.8rem;
         width: 100%;
         height: fit-content;
@@ -766,10 +835,76 @@ content menu {
             border-bottom: 1px solid var(--border-color);
             padding-bottom: 1.8rem;
         }
+        .sub-title {
+            display: flex;
+            gap: .8rem;
+            padding-bottom: 1.2rem;
+        }
+        .sub-section {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            background: var(--bg-lite);
+            border-radius: $globalradius;
+            border: 1px solid var(--border-color);
+            padding: 1.8rem 1.6rem;
+            .input-box {
+                --_inputHeight: 4.4rem;
+                --_inputPadding: 1.4rem;
+                display: flex;
+                align-items: center;
+                position: relative;
+                width: calc(100% - 2.4rem);
+                margin: 1.8rem 0 0 2.4rem;
+                background: var(--bg-deeper);
+                border: 1px solid var(--border-color);
+                border-radius: $globalradius;
+                label {
+                    position: absolute;
+                    margin-left: var(--_inputPadding);
+                    font-size: 1.4rem;
+                    transition: transform var(--hover-duration) linear,
+                                font-size var(--hover-duration) linear;
+                    opacity: .65;
+                }
+                input {
+                    position: relative;
+                    height: var(--_inputHeight);
+                    width: 100%;
+                    background: transparent;
+                    border: 0;
+                    border-radius: $globalradius;
+                    padding: 0 var(--_inputPadding);
+                    color: inherit;
+                    font-size: 1.6rem;
+                    z-index: 1;
+                    &[data-hidden="true"] {
+                        font-size: 2.2rem;
+                        -webkit-text-security: disc;
+                    }
+                }
+                &:has(input:focus-within) label, &:has(input.keep-above) label {
+                    transform: translateY(-3.5rem);
+                    font-size: 1.2rem;
+                }
+            }
+            @include dynamicColumn($md, var(--_gap), 2);
+        }
     }
-    > h1 {
+    h1, h2, h3 {
+        display: block;
+    }
+    h1 {
         font-size: 2.6rem;
         padding-bottom: 1.2rem;
+    }
+    h2 {
+        font-size: 2rem;
+        width: 100%;
+    }
+    h3 {
+        font-size: 1.6rem;
+        flex: 1 0 auto;
     }
 }
 
@@ -777,13 +912,13 @@ body {
     content menu {
         opacity: 0;
         z-index: -1;
-        transition: opacity $globalduration linear;
+        transition: opacity var(--global-duration) linear;
     }
     &.showmenu {
         header .btn-menu {
-            circle {
+            .circle {
                 animation: unset;
-                dot {
+                .dot {
                     transform: scale(1);
                 }
             }

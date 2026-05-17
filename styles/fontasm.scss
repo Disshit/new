@@ -1,4 +1,4 @@
-$version: 20260317225626;
+$version: 20260417020722;
 
 @font-face {
     font-family: 'Fontasm';
@@ -66,5 +66,11 @@ $version: 20260317225626;
     }
     &.fa-copy::before {
         content: '\E010';
+    }
+    &.fa-image::before {
+        content: '\E011';
+    }
+    &.fa-pastefox::before {
+        content: '\E012';
     }
 }

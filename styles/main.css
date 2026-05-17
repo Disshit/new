@@ -60,7 +60,7 @@
   background: rgba(0, 0, 0, 0) !important;
 }
 *, *::before, *::after {
-  transition-duration: 0.075s;
+  transition-duration: var(--hover-duration);
   transition-timing-function: ease-in-out;
   box-sizing: border-box;
 }
@@ -75,15 +75,15 @@
   background: var(--accent-color);
 }
 
-circle, dot,
+.circle, .dot,
 button, ul, li,
 h1, h2, h3, h4, h5, h6,
 menu {
   all: unset;
 }
 
-circle, dot {
-  transition-duration: 0.075s;
+.circle, .dot {
+  transition-duration: var(--hover-duration);
   transition-timing-function: ease-in-out;
   box-sizing: border-box;
 }
@@ -95,6 +95,12 @@ menu {
 a, a:visited {
   color: var(--text-color);
   text-decoration: none;
+}
+
+i {
+  line-height: 1 !important;
+  height: -moz-fit-content;
+  height: fit-content;
 }
 
 header, footer, .options, form label, dropmenu {
@@ -109,8 +115,6 @@ anicon {
   align-items: center;
   justify-content: center;
   position: relative;
-}
-anicon, anicon i {
   line-height: 1 !important;
 }
 anicon i:not(:first-of-type) {
@@ -119,11 +123,72 @@ anicon i:not(:first-of-type) {
   top: 0;
 }
 
+.material-switch {
+  --_rem: 1rem;
+  --_track-width: 3.6;
+  --_thumb-size: 1.8;
+  display: inline-flex;
+  align-items: center;
+  gap: calc(1.2 * var(--_rem));
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.material-switch .material-track {
+  position: relative;
+  display: inline-block;
+  width: calc(var(--_track-width) * var(--_rem));
+  height: calc(1.4 * var(--_rem));
+  border-radius: calc(0.7 * var(--_rem));
+  background: linear-gradient(to right, var(--accent-faded) 50%, var(--bg-deeper) 50%);
+  background-size: 200% 100%;
+  background-position: 100% 0;
+  transition: background-position var(--global-duration) ease-out;
+}
+.material-switch .material-thumb {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  height: calc(var(--_thumb-size) * var(--_rem));
+  width: calc(var(--_thumb-size) * var(--_rem));
+  background-color: var(--text-color);
+  border-radius: 50%;
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+  transition: transform var(--global-duration) ease-out, background-color var(--global-duration) ease, box-shadow var(--global-duration) ease;
+}
+.material-switch input[type=checkbox] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.material-switch input[type=checkbox]:checked + .material-track {
+  background-position: 0% 0;
+}
+.material-switch input[type=checkbox]:checked + .material-track .material-thumb {
+  transform: translate(calc((var(--_track-width) - var(--_thumb-size)) * var(--_rem)), -50%);
+  background-color: var(--accent-color);
+}
+
 html {
+  --global-duration: 0.1s;
+  --hover-duration: 0.075s;
   --sans: 'Radio Canada', sans-serif;
   --mono: 'Courier Prime', monospace;
   --logo: 'Cuprum', sans-serif;
   font-size: 62.5%;
+}
+@media screen and (max-width: 767.98px) {
+  html {
+    font-size: 56.25%;
+  }
+}
+@media screen and (max-width: 639.98px) {
+  html {
+    font-size: 53.125%;
+  }
 }
 html, html body {
   height: 100%;
@@ -136,6 +201,10 @@ html body {
   padding: 0;
   background: var(--bg-deep);
   color: var(--text-color);
+}
+html body.noduration {
+  --global-duration: 0s;
+  --hover-duration: 0s;
 }
 
 .container {
@@ -193,7 +262,7 @@ header .btn-menu {
   justify-content: center;
   cursor: pointer;
 }
-header .btn-menu circle {
+header .btn-menu .circle {
   height: 3.6rem;
   width: 3.6rem;
   background: transparent;
@@ -204,17 +273,17 @@ header .btn-menu circle {
   align-items: center;
   justify-content: center;
 }
-header .btn-menu circle dot {
+header .btn-menu .circle .dot {
   height: 2.2rem;
   width: 2.2rem;
   border-radius: 100%;
   background: var(--text-color);
   transform: scale(0);
 }
-header .btn-menu:hover circle, header .btn-menu:focus-visible circle, header .btn-menu:active circle, header .btn-menu[class*=keyboard-active] circle {
+header .btn-menu:hover .circle, header .btn-menu:focus-visible .circle, header .btn-menu:active .circle, header .btn-menu[class*=keyboard-active] .circle {
   animation: unset;
 }
-header .btn-menu:active circle, header .btn-menu[class*=keyboard-active] circle {
+header .btn-menu:active .circle, header .btn-menu[class*=keyboard-active] .circle {
   transform: scale(0.65);
 }
 
@@ -292,6 +361,7 @@ content main form .input .btn-clear, content main form .input .btn-newtab {
   font-size: var(--_font-size);
   transform: scale(0);
   position: absolute;
+  line-height: 1 !important;
   right: 0;
   z-index: 2;
 }
@@ -299,7 +369,6 @@ content main form .input .btn-clear, content main form .input .btn-clear i, cont
   display: flex;
   align-items: center;
   justify-content: center;
-  line-height: 1;
 }
 content main form .input .btn-clear i, content main form .input .btn-newtab i {
   background: transparent;
@@ -352,7 +421,7 @@ content main form subdrop {
   justify-content: center;
   width: 100%;
   gap: 1.6rem;
-  transition: opacity 0.1s linear;
+  transition: opacity var(--global-duration) linear;
   opacity: 1;
   position: relative;
 }
@@ -433,7 +502,7 @@ content main form dropmenu .op-button anicon .fa-bar:nth-of-type(2) {
 }
 content main form dropmenu .op-button anicon i {
   font-size: 1.8rem;
-  transition: transform 0.1s linear;
+  transition: transform var(--global-duration) linear;
 }
 content main form dropmenu .op-button:hover div, content main form dropmenu .op-button:focus-visible div {
   background: var(--bg-lite-h);
@@ -505,7 +574,7 @@ content main form .btn-send, content main form .btn-send > *, content main form 
   display: flex;
   align-items: center;
   justify-content: center;
-  line-height: 1;
+  line-height: 1 !important;
   border-radius: 100%;
 }
 content main form .btn-send i:not(.esc), content main form .btn-shorten i:not(.esc), content main form .btn-copy i:not(.esc) {
@@ -526,7 +595,7 @@ content main form .btn-send:focus-visible > *, content main form .btn-shorten:fo
   border: 1px solid var(--border-color);
 }
 content main form .btn-send, content main form .btn-copy {
-  transition: transform 0.1s ease-in-out;
+  transition: transform var(--global-duration) ease-in-out;
 }
 content main form .btn-send:active > *, content main form .btn-send[class*=keyboard-active] > *, content main form .btn-copy:active > *, content main form .btn-copy[class*=keyboard-active] > * {
   transform: scale(0.75);
@@ -549,7 +618,7 @@ content main form .btn-shorten, content main form .btn-shorten > * {
 }
 content main form .btn-copy {
   width: calc(var(--_length) * var(--_font-size));
-  transition: transform 0.1s ease-in-out, width 0.1s ease-in-out, color 0.1s linear;
+  transition: transform var(--global-duration) ease-in-out, width var(--global-duration) ease-in-out, color var(--global-duration) linear;
 }
 content main form .btn-copy .success::before {
   content: "Copied to Clipboard";
@@ -605,14 +674,14 @@ content main form .sup .link-type {
   align-items: center;
   justify-content: center;
   gap: 2rem;
-  transition: gap 0.1s ease-in-out;
+  transition: gap var(--global-duration) ease-in-out;
 }
 content main form .sup .link-type li {
   --li-size: 6rem;
   --li-padding: 1rem;
   height: calc(var(--li-size) + var(--li-padding) * 2);
   width: calc(var(--li-size) + var(--li-padding) * 2);
-  transition: transform 0.1s ease-in-out, margin 0.1s ease-in-out;
+  transition: transform var(--global-duration) ease-in-out, margin var(--global-duration) ease-in-out;
 }
 content main form .sup .link-type li span {
   height: 100%;
@@ -624,7 +693,7 @@ content main form .sup .link-type li span {
   background: var(--bg-lite);
   cursor: pointer;
   border: 1px solid transparent;
-  transition: background 0.075s ease-in-out, transform 0.1s ease-in-out;
+  transition: background var(--hover-duration) ease-in-out, transform var(--global-duration) ease-in-out;
 }
 content main form .sup .link-type li:hover span, content main form .sup .link-type li:focus-visible span {
   background: var(--bg-lite-h);
@@ -638,9 +707,8 @@ content main form .sup .link-type li:not(.active):active span, content main form
 content main form .sup .link-type li.active span {
   color: var(--accent-color);
 }
-content main form .sup .link-type li .fa {
+content main form .sup .link-type li i {
   font-size: calc(var(--li-size) - var(--li-padding) * 2);
-  line-height: 1;
 }
 content main form .sup .link-type:has(li.active) {
   gap: 0.4rem;
@@ -662,10 +730,15 @@ content menu {
   flex-direction: column;
   height: 100%;
   width: 100%;
+  max-width: 1024px;
   background: var(--bg-deep);
   padding: 0 3.2rem;
 }
 content menu section {
+  --_gap: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--_gap);
   padding-top: 1.8rem;
   width: 100%;
   height: -moz-fit-content;
@@ -675,20 +748,89 @@ content menu section:not(:last-of-type) {
   border-bottom: 1px solid var(--border-color);
   padding-bottom: 1.8rem;
 }
-content menu > h1 {
+content menu section .sub-title {
+  display: flex;
+  gap: 0.8rem;
+  padding-bottom: 1.2rem;
+}
+content menu section .sub-section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: var(--bg-lite);
+  border-radius: 0.8rem;
+  border: 1px solid var(--border-color);
+  padding: 1.8rem 1.6rem;
+}
+content menu section .sub-section .input-box {
+  --_inputHeight: 4.4rem;
+  --_inputPadding: 1.4rem;
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: calc(100% - 2.4rem);
+  margin: 1.8rem 0 0 2.4rem;
+  background: var(--bg-deeper);
+  border: 1px solid var(--border-color);
+  border-radius: 0.8rem;
+}
+content menu section .sub-section .input-box label {
+  position: absolute;
+  margin-left: var(--_inputPadding);
+  font-size: 1.4rem;
+  transition: transform var(--hover-duration) linear, font-size var(--hover-duration) linear;
+  opacity: 0.65;
+}
+content menu section .sub-section .input-box input {
+  position: relative;
+  height: var(--_inputHeight);
+  width: 100%;
+  background: transparent;
+  border: 0;
+  border-radius: 0.8rem;
+  padding: 0 var(--_inputPadding);
+  color: inherit;
+  font-size: 1.6rem;
+  z-index: 1;
+}
+content menu section .sub-section .input-box input[data-hidden=true] {
+  font-size: 2.2rem;
+  -webkit-text-security: disc;
+}
+content menu section .sub-section .input-box:has(input:focus-within) label, content menu section .sub-section .input-box:has(input.keep-above) label {
+  transform: translateY(-3.5rem);
+  font-size: 1.2rem;
+}
+@media screen and (min-width: 768px) {
+  content menu section .sub-section {
+    width: calc((100% - var(--_gap) * 1) / 2);
+  }
+}
+content menu h1, content menu h2, content menu h3 {
+  display: block;
+}
+content menu h1 {
   font-size: 2.6rem;
   padding-bottom: 1.2rem;
+}
+content menu h2 {
+  font-size: 2rem;
+  width: 100%;
+}
+content menu h3 {
+  font-size: 1.6rem;
+  flex: 1 0 auto;
 }
 
 body content menu {
   opacity: 0;
   z-index: -1;
-  transition: opacity 0.1s linear;
+  transition: opacity var(--global-duration) linear;
 }
-body.showmenu header .btn-menu circle {
+body.showmenu header .btn-menu .circle {
   animation: unset;
 }
-body.showmenu header .btn-menu circle dot {
+body.showmenu header .btn-menu .circle .dot {
   transform: scale(1);
 }
 body.showmenu content menu {

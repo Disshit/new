@@ -30,9 +30,8 @@ function defaultShortening() {
     shorteningOption.classList.add('active');
 }
 
-function setDefaults() {
+(() => {
     try {defaultLinkType()} catch {}
     try {defaultEncoding()} catch {}
     try {defaultShortening()} catch {}
-}
-setDefaults();
+})();
